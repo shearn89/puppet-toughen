@@ -19,8 +19,10 @@ class toughen::mandatory_access (
   $mcstrans_ensure = 'absent'
 ){
 
-  case $::operatingsystem {
-    'CentOS': {
+  # TODO: parameter validation
+
+  case $::osfamily {
+    'redhat': {
       # section 1.4.1 - grub.conf
 
       # section 1.4.2 - set state
@@ -49,7 +51,7 @@ class toughen::mandatory_access (
       # TODO
     }
     default: {
-      fail("OS ${::operatingsystem} not supported.")
+      fail("OS family ${::osfamily} not supported.")
     }
   }
 }

@@ -11,8 +11,8 @@
 class toughen::updates (
   $use_gpg = true
 ){
-  case $::operatingsystem {
-    'CentOS': {
+  case $::osfamily {
+    'redhat': {
       if $use_gpg {
         augeas { 'enable yum gpgcheck':
           context => '/files/etc/yum.conf',
@@ -22,6 +22,7 @@ class toughen::updates (
         }
       }
 
+      # TODO
       # section 1.2.1 - connection to RHN repos
       # section 1.2.4 - disable RHNSD
       # section 1.2.5 - use yum for updates
@@ -30,7 +31,7 @@ class toughen::updates (
       # section 1.2.6 - verify package integrity
     }
     default: {
-      fail("OS ${::operatingsystem} not supported.")
+      fail("OS family ${::osfamily} not supported.")
     }
   }
 }
