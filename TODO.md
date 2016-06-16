@@ -9,7 +9,7 @@ Because I don't have Jira.
 * *updates* - few other things to check
 * -aide-
 * -boot-
-* process
+* -process-
 * *mandatory access* - need to check grub.conf
 * banners
 * legacy services

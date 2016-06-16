@@ -2,6 +2,8 @@ fixtures:
     repositories:
         stdlib: git://github.com/puppetlabs/puppetlabs-stdlib.git
         firewall: git://github.com/puppetlabs/puppetlabs-firewall.git
+        limits: git://github.com/puppetlabs/puppetlabs-limits.git
+        sysctl: git://github.com/thias/puppet-sysctl.git
     symlinks:
         toughen: "#{source_dir}"
 
