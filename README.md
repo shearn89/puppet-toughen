@@ -1,5 +1,9 @@
 # toughen
 
+Develop: [![Build Status](https://travis-ci.org/shearn89/toughen.svg?branch=develop)](https://travis-ci.org/shearn89/toughen)
+
+Master: [![Build Status](https://travis-ci.org/shearn89/toughen.svg?branch=master)](https://travis-ci.org/shearn89/toughen)
+
 #### Table of Contents
 
 1. [Description](#description)
