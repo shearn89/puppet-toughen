@@ -42,7 +42,83 @@
 #
 # Copyright 2016 Your name here, unless otherwise noted.
 #
-class toughen {
+class toughen (
+  $posture = 'default'
+){
+  class { 'toughen::sudo': posture => $posture }
+  contain toughen::sudo
 
+  class { 'toughen::updates': posture => $posture }
+  contain toughen::updates
 
+  class { 'toughen::aide': posture => $posture }
+  contain toughen::aide
+
+  class { 'toughen::selinux': posture => $posture }
+  contain toughen::selinux
+
+  class { 'toughen::boot': posture => $posture }
+  contain toughen::boot
+
+  class { 'toughen::process': posture => $posture }
+  contain toughen::process
+
+  class { 'toughen::legacy_services': posture => $posture }
+  contain toughen::legacy_services
+
+  class { 'toughen::services': posture => $posture }
+  contain toughen::services
+
+  class { 'toughen::network': posture => $posture }
+  contain toughen::network
+
+  class { 'toughen::rsyslog': posture => $posture }
+  contain toughen::rsyslog
+
+  class { 'toughen::auditing': posture => $posture }
+  contain toughen::auditing
+
+  class { 'toughen::cron': posture => $posture }
+  contain toughen::cron
+
+  class { 'toughen::ssh': posture => $posture }
+  contain toughen::ssh
+
+  class { 'toughen::pam': posture => $posture }
+  contain toughen::pam
+
+  class { 'toughen::shadow': posture => $posture }
+  contain toughen::shadow
+
+  class { 'toughen::banners': posture => $posture }
+  contain toughen::banners
+
+  class { 'toughen::perms_owners': posture => $posture }
+  contain toughen::perms_owners
+
+  class { 'toughen::user_env': posture => $posture }
+  contain toughen::user_env
+
+  # Exceptions go here
+  unless $posture == 'some_exception' {
+    class { 'toughen::filesystem': posture => $posture }
+    contain toughen::filesystem
+
+    Firewall {
+      before => Class['toughen::firewall::post'],
+      require => Class['toughen::firewall::pre'],
+    }
+    contain toughen::firewall
+  }
+
+  # Posture-specific tweaks
+  case $posture {
+    'no_firewall': {
+      class { '::firewall': ensure => 'stopped' }
+    }
+    'default': {}
+    default: {
+      fail("Security posture ${posture} not recognised!")
+    }
+  }
 }
