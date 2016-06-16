@@ -11,7 +11,7 @@ Because I don't have Jira.
 * -boot-
 * -process-
 * *mandatory access* - need to check grub.conf
-* banners
+* -banners-
 * legacy services
 * services
 * network
