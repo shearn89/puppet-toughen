@@ -127,6 +127,4 @@ class toughen {
   class { 'toughen::shadow': }
   contain toughen::shadow
 
-
-
 }

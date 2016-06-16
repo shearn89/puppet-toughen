@@ -19,11 +19,26 @@ class toughen::mandatory_access (
   $mcstrans_ensure = 'absent'
 ){
 
-  # TODO: parameter validation
+  if !($mode in ['enforcing', 'permissive', 'disabled']) {
+    fail("access mode ${mode} is invalid")
+  }
+
+  # TODO: check these values
+  if !($policy in ['targeted', 'multiuser']) {
+    fail("poolicy type ${policy} is not supported")
+  }
+
+  if !($setroubleshoot_ensure in ['absent', 'installed']) {
+    fail("setroubleshoot package value ${setroubleshoot_ensure} is invalid")
+  }
+
+  if !($mcstrans_ensure in ['absent', 'installed']) {
+    fail("setroubleshoot package value ${mcstrans_ensure} is invalid")
+  }
 
   case $::osfamily {
     'redhat': {
-      # section 1.4.1 - grub.conf
+      # TODO: section 1.4.1 - grub.conf
 
       # section 1.4.2 - set state
       augeas { 'selinux-mode':
@@ -47,8 +62,7 @@ class toughen::mandatory_access (
         ensure => $mcstrans_ensure,
       }
 
-      # section 1.4.6 - check for unconfied daemons
-      # TODO
+      # TODO: section 1.4.6 - check for unconfied daemons
     }
     default: {
       fail("OS family ${::osfamily} not supported.")
