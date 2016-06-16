@@ -11,7 +11,8 @@
     {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"},
     {"name":"puppetlabs-firewall"},
     {"name":"puppetlabs-limits"},
-    {"name":"thias-sysctl"}
+    {"name":"thias-sysctl"},
+    {"name":"puppetlabs-ntp"}
   ],
   "data_provider": null
 }
