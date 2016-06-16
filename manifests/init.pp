@@ -42,83 +42,70 @@
 #
 # Copyright 2016 Your name here, unless otherwise noted.
 #
-class toughen (
-  $posture = 'default'
-){
-  class { 'toughen::sudo': posture => $posture }
+class toughen {
+
+  class { 'toughen::sudo': }
   contain toughen::sudo
 
-  class { 'toughen::updates': posture => $posture }
+  class { 'toughen::updates': }
   contain toughen::updates
 
-  class { 'toughen::aide': posture => $posture }
+  class { 'toughen::aide': }
   contain toughen::aide
 
-  class { 'toughen::selinux': posture => $posture }
+  class { 'toughen::selinux': }
   contain toughen::selinux
 
-  class { 'toughen::boot': posture => $posture }
+  class { 'toughen::boot': }
   contain toughen::boot
 
-  class { 'toughen::process': posture => $posture }
+  class { 'toughen::process': }
   contain toughen::process
 
-  class { 'toughen::legacy_services': posture => $posture }
+  class { 'toughen::legacy_services': }
   contain toughen::legacy_services
 
-  class { 'toughen::services': posture => $posture }
+  class { 'toughen::services': }
   contain toughen::services
 
-  class { 'toughen::network': posture => $posture }
+  class { 'toughen::network': }
   contain toughen::network
 
-  class { 'toughen::rsyslog': posture => $posture }
+  class { 'toughen::rsyslog': }
   contain toughen::rsyslog
 
-  class { 'toughen::auditing': posture => $posture }
+  class { 'toughen::auditing': }
   contain toughen::auditing
 
-  class { 'toughen::cron': posture => $posture }
+  class { 'toughen::cron': }
   contain toughen::cron
 
-  class { 'toughen::ssh': posture => $posture }
+  class { 'toughen::ssh': }
   contain toughen::ssh
 
-  class { 'toughen::pam': posture => $posture }
+  class { 'toughen::pam': }
   contain toughen::pam
 
-  class { 'toughen::shadow': posture => $posture }
+  class { 'toughen::shadow': }
   contain toughen::shadow
 
-  class { 'toughen::banners': posture => $posture }
+  class { 'toughen::banners': }
   contain toughen::banners
 
-  class { 'toughen::perms_owners': posture => $posture }
+  class { 'toughen::perms_owners': }
   contain toughen::perms_owners
 
-  class { 'toughen::user_env': posture => $posture }
+  class { 'toughen::user_env': }
   contain toughen::user_env
 
-  # Exceptions go here
-  unless $posture == 'some_exception' {
-    class { 'toughen::filesystem': posture => $posture }
-    contain toughen::filesystem
+  class { 'toughen::filesystem': }
+  contain toughen::filesystem
 
-    Firewall {
-      before => Class['toughen::firewall::post'],
-      require => Class['toughen::firewall::pre'],
-    }
-    contain toughen::firewall
+  Firewall {
+    before => Class['toughen::firewall::post'],
+    require => Class['toughen::firewall::pre'],
   }
+  class { 'toughen::firewall': }
+  contain toughen::firewall
 
-  # Posture-specific tweaks
-  case $posture {
-    'no_firewall': {
-      class { '::firewall': ensure => 'stopped' }
-    }
-    'default': {}
-    default: {
-      fail("Security posture ${posture} not recognised!")
-    }
-  }
 }

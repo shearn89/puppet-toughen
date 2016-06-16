@@ -26,8 +26,9 @@ Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin
 
 root	ALL=(ALL) 	ALL
 
-# Give domain admins access
-%domain\ admins	ALL=(root)	ALL
+<% unless @safety_id.empty? -%>
+<%= @safety_id %>   ALL=(root)	ALL
+<% end -%>
 
 <% if scope.lookupvar('::is_virtual') == 'true' -%>
 # Set vagrant permissions
