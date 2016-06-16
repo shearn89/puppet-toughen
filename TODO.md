@@ -12,7 +12,7 @@ Because I don't have Jira.
 * -process-
 * *mandatory access* - need to check grub.conf
 * -banners-
-* legacy services
+* -legacy services-
 * services
 * network
 * auditing
