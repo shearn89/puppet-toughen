@@ -14,8 +14,8 @@
 
 ## Description
 
-This is a puppet module and example profiles that applies the CIS hardening 
-controls as detailed in the documents available under 'Guides'.
+This is a puppet module that applies the CIS hardening controls as detailed in 
+the documents referenced in `guides.txt`.
 
 The aim of me writing my own module is to lay out the controls in a manner that
 I feel is readable and easy to understand, whilst also providing flexibility to
