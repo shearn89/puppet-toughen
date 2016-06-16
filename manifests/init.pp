@@ -44,5 +44,89 @@
 #
 class toughen {
 
+  class { 'toughen::sudo': }
+  contain toughen::sudo
+
+  # 1.1
+  class { 'toughen::filesystem': }
+  contain toughen::filesystem
+
+  # 1.2
+  class { 'toughen::updates': }
+  contain toughen::updates
+
+  # 1.3
+  class { 'toughen::aide': }
+  contain toughen::aide
+
+  # 1.4
+  class { 'toughen::boot': }
+  contain toughen::boot
+
+  # 1.5
+  class { 'toughen::process': }
+  contain toughen::process
+
+  # 1.6
+  class { 'toughen::mandatory_access': }
+  contain toughen::mandatory_access
+
+  # 1.7
+  class { 'toughen::banners': }
+  contain toughen::banners
+
+  # 2.1
+  class { 'toughen::legacy_services': }
+  contain toughen::legacy_services
+
+  # 2.2
+  class { 'toughen::services': }
+  contain toughen::services
+
+  # 3
+  class { 'toughen::network': }
+  contain toughen::network
+  
+  # 3.6
+  Firewall {
+    before => Class['toughen::firewall::post'],
+    require => Class['toughen::firewall::pre'],
+  }
+  class { 'toughen::firewall': }
+  contain toughen::firewall
+
+  # 4.1
+  class { 'toughen::auditing': }
+  contain toughen::auditing
+
+  # 4.2
+  class { 'toughen::rsyslog': }
+  contain toughen::rsyslog
+
+  # 5.1
+  class { 'toughen::cron': }
+  contain toughen::cron
+
+  # 5.2
+  class { 'toughen::ssh': }
+  contain toughen::ssh
+
+  # 5.3
+  class { 'toughen::pam': }
+  contain toughen::pam
+
+  # 5.4?
+  class { 'toughen::perms_owners': }
+  contain toughen::perms_owners
+
+  # 5.4?
+  class { 'toughen::user_env': }
+  contain toughen::user_env
+
+  # 6.1
+  class { 'toughen::shadow': }
+  contain toughen::shadow
+
+
 
 }

@@ -1,0 +1,11 @@
+# Guides Used #
+
+The module works to the following PDFs, available from [CIS Security](https://benchmarks.cisecurity.org/downloads/multiform/index.cfm)
+
+* CIS_Amazon_Linux_Benchmark_v2.0.0.pdf
+* CIS_CentOS_Linux_6_Benchmark_v2.0.1.pdf
+* CIS_CentOS_Linux_7_Benchmark_v2.1.0.pdf
+* CIS_Debian_Linux_8_Benchmark_v1.0.0.pdf
+* CIS_Red_Hat_Enterprise_Linux_6_Benchmark_v2.0.1.pdf
+* CIS_Red_Hat_Enterprise_Linux_7_Benchmark_v2.1.0.pdf
+* CIS_Ubuntu_14.04_LTS_Server_Benchmark_v1.0.0.pdf
