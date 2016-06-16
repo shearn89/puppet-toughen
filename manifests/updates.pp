@@ -11,6 +11,8 @@
 class toughen::updates (
   $use_gpg = true
 ){
+  validate_bool($use_gpg)
+
   case $::osfamily {
     'redhat': {
       if $use_gpg {

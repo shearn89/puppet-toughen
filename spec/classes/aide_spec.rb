@@ -31,4 +31,37 @@ describe 'toughen::aide' do
       }
   end
 
+  context "with invalid check_hour" do
+      let :params do
+          {
+              :check_hour => 'words'
+          }
+      end
+      it {
+          expect { should raise_error(Puppet::Error) }
+      }
+  end
+
+  context "with invalid check_minute" do
+      let :params do
+          {
+              :check_minute => 'words'
+          }
+      end
+      it {
+          expect { should raise_error(Puppet::Error) }
+      }
+  end
+
+  context "with invalid package_ensure" do
+      let :params do
+          {
+              :package_ensure => 'invalid'
+          }
+      end
+      it {
+          expect { should raise_error(Puppet::Error) }
+      }
+  end
+
 end

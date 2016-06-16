@@ -20,6 +20,13 @@ class toughen::aide (
   $check_minute = 0
 ){
 
+  if !($package_ensure in [ 'installed', 'absent' ]) {
+    fail('package_ensure parameter must be "installed" or "absent"')
+  }
+
+  validate_integer($check_hour)
+  validate_integer($check_minute)
+
   package { 'aide':
     ensure => $package_ensure,
   }

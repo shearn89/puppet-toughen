@@ -11,26 +11,20 @@ describe 'toughen::updates' do
   end
 
   context "with unsupported OS" do
-      let :facts do
-          {
-              :osfamily => 'darwin'
-          }
-      end
-      it {
-          expect { should raise_error(Puppet::Error) }
-      }
+      let :facts do { :osfamily => 'darwin' } end
+      it { expect { should raise_error(Puppet::Error) } }
   end
 
   context "without gpgcheck" do
-      let :params do
-          {
-              :use_gpg => false
-          }
-      end
-      it {
-        should_not contain_augeas('enable yum gpgcheck')
-    }
+      let :params do { :use_gpg => false } end
+      it { should_not contain_augeas('enable yum gpgcheck') }
   end
 
+  context "with invalid use_gpg" do
+      let :params do { :use_gpg => 'string' } end
+      it { expect { should raise_error(Puppet::Error) } }
+      let :params do { :use_gpg => 1 } end
+      it { expect { should raise_error(Puppet::Error) } }
+  end
 
 end
