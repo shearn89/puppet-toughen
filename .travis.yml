@@ -1,0 +1,22 @@
+language: ruby
+rvm:
+- 2.1.0
+- 2.0.0
+script: bundle exec rake spec
+branches:
+  only:
+  - master
+  - develop
+env:
+- PUPPET_VERSION=4.5.2
+- PUPPET_VERSION=3.8.7
+- PUPPET_VERSION=3.6.2
+notifications:
+  email: false
+  pushover:
+    on_success: change
+    on_failure: change
+    users:
+      secure: Qy0mjGMldVsIgskMmmYMLpP2E0pHaVligibeb3QzzJ/7XVTWsQKc2jyEUx37/9fikhGwaCWcaCtdgu76bBPTOW3xrSjqo9XjeWipSXvr7E3WHvzDD5kcn1RNQ3WTak8FGs8C64x/+W6o3tEvKFFu4BL6M7ej7zw70NhqF3XGjBjb9MIJ97ZG+R/qahDv3mle5+DrUHnvrtKk9En3mY0J0oH7IPkFObW3eatjRQv9tcEAoXd5ALzNjlRScWK7YuTNHeybE5+oLsJKTqnNXo2DJ2Z9Lt0dtN5KJaitWhv51oRUBHB1qY64T1bJf7I32S2e3zqO55/V2uOE6mZhXDrPTqGN7BLefv4EuPui8KtvRsNZlSWTUdY4QnQVSKd04LscfwQ+O0w+Pqcp9+qLhlkq98MooZzFQRmuD+aaIf4H8q7iOO86UD1Xh5rvqJbHdcpXFE/Rex0LT/zNGVCWDyhDUSt9KA+++S5SaKGkemxeErdnLtfYNV6r3DKpCtUHMCG9RrEmiuamTf7AOWVGrpu+kK8Q7mVq/Cvcyqeungsa1Cbw2U+GAEE14syy1HIJz5b6GCx9aE7Tj7FyStM62IaeNWPrtr7nYGj+1nQLQF6XiNDEWWKv83BUR2QAOzw1GRcGquC/4MdLdX15xcGvEISA4GcemTx8qOXf0iWGNxRrNBE=
+    api_key:
+      secure: lral2sTGb5wtu+/r3aGVjVrh9jK1xWUJ2HYnIhBJCOChmXB1Snkg+YiJV6qfp6q5ncbwlR/rYKLkda0d4uDDTbaSTpsxneTK2RfP0kLSbyr0s2D9mgd9sl9ToQ3MszPhMu1Fu+i5pnrkPI6Xjsjx2sMsYIL+xEsZbqneNytVlgebOzbT+S3pg3XP13lg6VtZN2QMUeD602w/WLwqDW98H6qLY7ewY09GVoVBbdAm0qt90jh41zmq/ySizIarDCRbHlSqXNj+mr5KEOL5cQ6bQL6KZmow1CIAIMXa2FgGras06yTjjx6jAHjmstVVLWL91k0sBIZlw8FwwSaJIop3OdIJbcNgicN2Gcv/AZICEbCTDlkkUftIz7AQrSzMsez/jKsteKnfumld9vQ5itUwkzyuXEOKOhrvMsPGNFGqDLW0kWDw1kNXKSDRoDmzU9IvbhFDcLk5+rB30eM2IK52dClgOKz8w65OLMW6c5ePy46jvZ+5aJmFs3PBb23ZsZmIWyuAWDhGzNTdacmfxhpVfpRpdCXYyyr92c/Mg06dCRaEE2Yf8mcazp0mtD111t1ar1K0mY6ckDSca7Um6ucmtZMUfc56/FuZPYc4kAgw7xWRAhqEXVOgEdAgKnL83eARPy+IZdTvWQYgcfdauGnF81BOqadacqhDPBf+XgYu3Ak=
