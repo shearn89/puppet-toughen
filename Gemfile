@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 group :test do
     gem 'puppetlabs_spec_helper', :require => false
+    gem 'codeclimate-test-reporter', :require => false
 end
 
 puppetversion = ENV.key?('PUPPET_VERSION') ? "= #{ENV['PUPPET_VERSION']}" : ['>= 2.7']

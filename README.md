@@ -1,6 +1,6 @@
 # toughen
 
-[![Build Status](https://travis-ci.org/shearn89/toughen.svg?branch=develop)](https://travis-ci.org/shearn89/toughen)
+[![Build Status](https://travis-ci.org/shearn89/puppet-toughen.svg?branch=develop)](https://travis-ci.org/shearn89/puppet-toughen)
 
 #### Table of Contents
 
@@ -16,7 +16,7 @@
 
 ## Description
 
-This is a puppet module that applies the CIS hardening controls as detailed in 
+This is a puppet module that applies various hardening controls as detailed in 
 the documents referenced in `guides.txt`.
 
 The aim of me writing my own module is to lay out the controls in a manner that

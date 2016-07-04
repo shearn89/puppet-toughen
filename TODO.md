@@ -13,7 +13,7 @@ Because I don't have Jira.
 * *mandatory access* - need to check grub.conf
 * -banners-
 * -legacy services-
-* services
+* -services-
 * network
 * auditing
 * rsyslog
