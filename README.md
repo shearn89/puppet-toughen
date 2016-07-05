@@ -1,6 +1,6 @@
 # toughen
 
-[![Build Status](https://travis-ci.org/shearn89/puppet-toughen.svg?branch=develop)](https://travis-ci.org/shearn89/puppet-toughen)
+[![Build Status](https://travis-ci.org/shearn89/puppet-toughen.svg?branch=develop)](https://travis-ci.org/shearn89/puppet-toughen) [![Code Climate](https://codeclimate.com/github/shearn89/puppet-toughen/badges/gpa.svg)](https://codeclimate.com/github/shearn89/puppet-toughen) [![Test Coverage](https://codeclimate.com/github/shearn89/puppet-toughen/badges/coverage.svg)](https://codeclimate.com/github/shearn89/puppet-toughen/coverage)
 
 #### Table of Contents
 
