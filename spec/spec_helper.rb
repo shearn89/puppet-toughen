@@ -6,6 +6,8 @@ SimpleCov.start do
         SimpleCov::Formatter::HTMLFormatter,
         CodeClimate::TestReporter::Formatter
     ])
+    add_filter "/vendor/"
+    add_filter "/spec/"
 end
 
 RSpec.configure do |c|
