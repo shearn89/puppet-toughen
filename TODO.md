@@ -14,7 +14,7 @@ Because I don't have Jira.
 * -banners-
 * -legacy services-
 * -services-
-* network
+* -network-
 * auditing
 * rsyslog
 * cron
@@ -23,3 +23,11 @@ Because I don't have Jira.
 * perms owners
 * user env
 * shadow
+
+## Further work ##
+
+* Review hardening in line with the **spirit** of the guide, not just the 'checkbox'.
+
+## Way down the list ##
+
+* Set up CI (concourse?) and do actual testing on the supported OS(s).

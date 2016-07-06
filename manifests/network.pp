@@ -41,6 +41,14 @@ class toughen::network (
   validate_re($log_martians, '[0,1]')
   validate_re($ignore_broadcasts, '[0,1]')
 
+  case $::osfamily {
+    'redhat': {}
+    'darwin': {
+      fail("OS family ${::osfamily} is not supported")
+    }
+    default: {}
+  }
+
   file { [ '/etc/hosts.allow', '/etc/hosts.deny' ]:
     owner => root,
     group => root,
