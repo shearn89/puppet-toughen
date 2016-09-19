@@ -3,13 +3,8 @@
 class toughen::auditing (
 ){
 
-  # Find setuid binaries and check if they're being monitored by auditd
+  # TODO: Find setuid binaries and check if they're being monitored by auditd
   # ///modules/cis/linuxcontrols/scripts/f0023.sh
-
-  service { 'auditd':
-    ensure => 'running',
-    enable => true,
-  }
 
   case $::operatingsystem {
     /^(CentOS|RedHat)$/: {

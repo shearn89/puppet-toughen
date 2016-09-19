@@ -15,7 +15,8 @@
     {"name":"puppetlabs-ntp"},
     {"name":"herculesteam-augeasproviders_core"},
     {"name":"herculesteam-augeasproviders_grub"},
-    {"name":"kemra102-auditd"}
+    {"name":"kemra102-auditd"},
+    {"name":"puppetlabs-concat"}
   ],
   "data_provider": null
 }

@@ -8,7 +8,7 @@ describe 'toughen::auditing' do
     end
 
     context 'with unsupported OS' do
-        let (:facts) do { :operatingsystem => 'Ubuntu' } end
+        let (:facts) do { :osfamily => 'debian', :operatingsystem => 'Ubuntu' } end
         it { expect { should raise_error(Puppet::Error) } }
     end
 
