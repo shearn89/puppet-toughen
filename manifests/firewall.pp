@@ -4,6 +4,7 @@ class toughen::firewall (
   resources { 'firewall':
     purge => true,
   }
+  ## TODO: purge chains
   # resources { 'firewallchain':
   #   purge => true,
   # }

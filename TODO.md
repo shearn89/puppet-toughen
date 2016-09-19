@@ -12,10 +12,10 @@ Because I don't have Jira.
 * -process-
 * *mandatory access* - need to check grub.conf
 * -banners-
-* -legacy services-
+* *legacy services* - postfix, ntp
 * -services-
 * -network-
-* auditing
+* -auditing-
 * rsyslog
 * cron
 * ssh

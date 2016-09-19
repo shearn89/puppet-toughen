@@ -5,6 +5,9 @@ fixtures:
         limits: git://github.com/puppetlabs/puppetlabs-limits.git
         sysctl: git://github.com/thias/puppet-sysctl.git
         ntp: git://github.com/puppetlabs/puppetlabs-ntp.git
+        augeasproviders_grub: git://github.com/hercules-team/augeasproviders_grub.git
+        augeasproviders_core: git://github.com/hercules-team/augeasproviders_core.git
+        auditd: git://github.com/kemra102/puppet-auditd.git
     symlinks:
         toughen: "#{source_dir}"
 

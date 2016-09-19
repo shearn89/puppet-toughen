@@ -18,6 +18,6 @@ describe 'toughen::auditing' do
     end
 
     context 'with supported version' do
-        it { should contain_augeas('grub audit settings') }
+        it { should contain_kernel_parameter('audit') }
     end
 end

@@ -12,7 +12,10 @@
     {"name":"puppetlabs-firewall"},
     {"name":"puppetlabs-limits"},
     {"name":"thias-sysctl"},
-    {"name":"puppetlabs-ntp"}
+    {"name":"puppetlabs-ntp"},
+    {"name":"herculesteam-augeasproviders_core"},
+    {"name":"herculesteam-augeasproviders_grub"},
+    {"name":"kemra102-auditd"}
   ],
   "data_provider": null
 }
