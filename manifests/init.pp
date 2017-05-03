@@ -86,7 +86,7 @@ class toughen {
   # 3
   class { 'toughen::network': }
   contain toughen::network
-  
+
   # 3.6
   Firewall {
     before => Class['toughen::firewall::post'],

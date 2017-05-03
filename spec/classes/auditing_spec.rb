@@ -22,6 +22,7 @@ describe 'toughen::auditing' do
           :osfamily => 'redhat',
           :operatingsystem => 'CentOS',
           :operatingsystemmajrelease => '7',
+          :privileged_commands => ['/usr/bin/fakebin'],
         } end
         it { should contain_kernel_parameter('audit') }
     end
