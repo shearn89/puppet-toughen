@@ -29,10 +29,8 @@ class toughen::auditing (
       }
 
       $rules = [
-        '-a always,exit -F arch=b64 -S adjtimex -S settimeofday -k time-change',
-        '-a always,exit -F arch=b32 -S adjtimex -S settimeofday -S stime -k time-change',
-        '-a always,exit -F arch=b32 -S clock_settime -k time-change',
-        '-a always,exit -F arch=b64 -S clock_settime -k time-change',
+        '-a always,exit -F arch=b64 -S clock_settime -S adjtimex -S settimeofday -S stime -k time-change',
+        '-a always,exit -F arch=b32 -S clock_settime -S adjtimex -S settimeofday -S stime -k time-change',
         '-a always,exit -F arch=b32 -S sethostname -S setdomainname -k system-locale',
         '-a always,exit -F arch=b64 -S sethostname -S setdomainname -k system-locale',
         '-a always,exit -F arch=b64 -S chmod -S fchmod -S fchmodat -F auid>=1000 -F auid!=4294967295 -k perm_mod',
