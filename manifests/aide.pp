@@ -41,4 +41,5 @@ class toughen::aide (
     }
   }
 
+  # TODO: first run and other config
 }

@@ -5,6 +5,10 @@ group :test do
     gem 'codeclimate-test-reporter', :require => false
 end
 
+group :acceptance do
+    gem 'beaker-rspec'
+end
+
 puppetversion = ENV.key?('PUPPET_VERSION') ? "= #{ENV['PUPPET_VERSION']}" : ['>= 2.7']
 gem 'puppet', puppetversion
 

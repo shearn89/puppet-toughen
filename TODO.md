@@ -12,10 +12,10 @@ Because I don't have Jira.
 * -process-
 * *mandatory access* - need to check grub.conf
 * -banners-
-* -legacy services-
+* *legacy services* - postfix, ntp
 * -services-
-* network
-* auditing
+* -network-
+* -auditing-
 * rsyslog
 * cron
 * ssh
@@ -23,3 +23,15 @@ Because I don't have Jira.
 * perms owners
 * user env
 * shadow
+
+## System Testing ##
+
+* Flesh out the system tests so it's more than parameter checking.
+
+## Further work ##
+
+* Review hardening in line with the **spirit** of the guide, not just the 'checkbox'.
+
+## Way down the list ##
+
+* Set up CI (concourse?) and do actual testing on the supported OS(s).
