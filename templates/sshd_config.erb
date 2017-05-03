@@ -1,0 +1,107 @@
+Port <%= @port %>
+AddressFamily <%= @address_family %>
+ListenAddress <%= @listen_address %>
+Protocol <%= @protocol %>
+
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+
+#RekeyLimit default none
+SyslogFacility AUTHPRIV
+LogLevel <%= @log_level.upcase %>
+
+LoginGraceTime <%= @login_grace_time %>
+PermitRootLogin <%= @permit_root_login %>
+StrictModes yes
+MaxAuthTries <%= @max_auth_tries %>
+#MaxSessions 10
+
+#RSAAuthentication yes
+#PubkeyAuthentication yes
+
+AuthorizedKeysFile	.ssh/authorized_keys
+
+#AuthorizedPrincipalsFile none
+#AuthorizedKeysCommand none
+#AuthorizedKeysCommandUser nobody
+
+RhostsRSAAuthentication no
+HostbasedAuthentication <%= @hostbased_authentication %>
+#IgnoreUserKnownHosts no
+IgnoreRhosts <%= @ignore_rhosts %>
+
+PermitEmptyPasswords <%= @permit_empty_passwords %>
+PasswordAuthentication <%= @password_authentication %>
+
+ChallengeResponseAuthentication no
+
+# Kerberos options
+#KerberosAuthentication no
+#KerberosOrLocalPasswd yes
+#KerberosTicketCleanup yes
+#KerberosGetAFSToken no
+#KerberosUseKuserok yes
+
+# GSSAPI options
+GSSAPIAuthentication <%= @gssapi_authentication %>
+GSSAPICleanupCredentials <%= @gssapi_cleanup_credentials %>
+#GSSAPIStrictAcceptorCheck yes
+#GSSAPIKeyExchange no
+#GSSAPIEnablek5users no
+
+UsePAM <%= @use_pam %>
+
+AllowAgentForwarding <%= @allow_agent_forwarding %>
+#AllowTcpForwarding yes
+#GatewayPorts no
+X11Forwarding <%= @x11_forwarding %>
+#X11DisplayOffset 10
+#X11UseLocalhost yes
+#PermitTTY yes
+PrintMotd <%= @print_motd %>
+PrintLastLog <%= @print_lastlog %>
+#TCPKeepAlive yes
+#UseLogin no
+UsePrivilegeSeparation <%= @use_privileges_seperation %>
+PermitUserEnvironment <%= @permit_user_env %>
+Compression <%= @compression %>
+ClientAliveInterval <%= @client_alive_interval %>
+ClientAliveCountMax <%= @client_alive_count_max %>
+#ShowPatchLevel no
+UseDNS <%= @use_dns %>
+#PidFile /var/run/sshd.pid
+#MaxStartups 10:30:100
+PermitTunnel <%= @permit_tunnel %>
+#ChrootDirectory none
+#VersionAddendum none
+
+# no default banner path
+Banner <%= @banner %>
+
+# Accept locale-related environment variables
+AcceptEnv LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES
+AcceptEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT
+AcceptEnv LC_IDENTIFICATION LC_ALL LANGUAGE
+AcceptEnv XMODIFIERS
+
+# override default of no subsystems
+Subsystem	sftp	/usr/libexec/openssh/sftp-server
+
+Ciphers <%= @ciphers.map { |c| "#{c.to_s}"}.join(',') %>
+MACs <%= @macs.map { |m| "#{m.to_s}"}.join(',') %>
+
+# User/Group ACs here if present:
+<% if @allow_users.length > 0 -%>
+AllowUsers <%= @allow_users.map { |u| "#{u.to_s}"}.join(' ') %>
+<% end -%>
+<% if @allow_users.length > 0 -%>
+AllowGroups <%= @allow_groups.map { |g| "#{g.to_s}"}.join(' ') %>
+<% end -%>
+<% if @allow_users.length > 0 -%>
+DenyUsers <%= @deny_users.map { |u| "#{u.to_s}"}.join(' ') %>
+<% end -%>
+<% if @allow_users.length > 0 -%>
+DenyGroups <%= @deny_groups.map { |g| "#{g.to_s}"}.join(' ') %>
+<% end -%>
+# end

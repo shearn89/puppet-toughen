@@ -18,7 +18,7 @@ Because I don't have Jira.
 * -auditing-
 * rsyslog
 * cron
-* ssh
+* -ssh- 
 * pam
 * perms owners
 * user env
