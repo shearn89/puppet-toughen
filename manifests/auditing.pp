@@ -89,7 +89,7 @@ class toughen::auditing (
         order   => '999',
       }
 
-      # Use the custom fact defined in lib/facts/privileged_commands.rb:
+      # Use the custom fact defined by this module
       $binary_array = split($::privileged_commands, ',')
       toughen::audit_priv_command { $binary_array: }
     }
