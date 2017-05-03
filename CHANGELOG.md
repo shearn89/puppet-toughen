@@ -2,6 +2,9 @@
 All notable changes to the project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.1.2] - 2017-05-03
+- Forgot to bump the metadata.json version to match the tag. Doh!
+
 ## [0.1.1] - 2017-05-03
 - Tweaks to auditing class to meet STIG compliance standards with oscap scanner
 
