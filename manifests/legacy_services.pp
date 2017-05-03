@@ -13,7 +13,7 @@ class toughen::legacy_services (
   $telnet_ensure = 'absent',
   $xinetd_ensure = 'absent'
 ){
-  
+
   if !($telnet_ensure in [ 'installed', 'absent' ]) {
     fail('Telnet package ensure should be "installed" or "absent"')
   }

@@ -19,7 +19,7 @@ class toughen::sudo (
   if !($package_ensure in [ 'installed', 'absent' ]) {
     fail('package_ensure parameter must be "installed" or "absent"')
   }
-  
+
   validate_string($safety_id)
 
   package { 'sudo':

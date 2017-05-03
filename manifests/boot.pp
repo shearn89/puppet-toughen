@@ -40,7 +40,7 @@ class toughen::boot (
         context => '/files/etc/sysconfig/init',
         changes => 'set PROMPT no',
       }
-      
+
       augeas { 'sysconfig-singleuser':
         context => '/files/etc/sysconfig/init',
         changes => 'set single /sbin/sulogin',
