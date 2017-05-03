@@ -89,9 +89,8 @@ class toughen::auditing (
         order   => '999',
       }
 
-      # TODO: CentOS 7, CIS v2.1 control 4.1.12, use of privileged commands
-      # find / -xdev \( -perm -4000 -o -perm -2000 \) -type f | awk {'print "-a always,exit -F path=" $1 " -F perm=x \
-      #   -F auid>=1000 -F auid!=4294967295 -k privileged" }'
+      # Use the custom fact defined in lib/facts/privileged_commands.rb:
+      toughen::audit_priv_command { $facts['privileged_commands']: }
     }
     default: {
       fail("OS ${::operatingsystem} is not supported")

@@ -16,7 +16,7 @@ RSpec.configure do |c|
         :operatingsystem => 'CentOS',
         :operatingsystemrelease => '7',
         :operatingsystemmajrelease => '7',
-        :operatingsystemminrelease => '2',
+        :operatingsystemminrelease => '3',
         :kernel => 'Linux'
     }
 end

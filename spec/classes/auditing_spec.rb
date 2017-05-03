@@ -18,6 +18,12 @@ describe 'toughen::auditing' do
     end
 
     context 'with supported version' do
+        let (:facts) do {
+          :osfamily => 'redhat',
+          :operatingsystem => 'CentOS',
+          :operatingsystemmajrelease => '7',
+        } end
         it { should contain_kernel_parameter('audit') }
     end
+
 end
