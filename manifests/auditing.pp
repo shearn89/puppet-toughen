@@ -1,6 +1,11 @@
 # Class: toughen::auditing
 # 
 class toughen::auditing (
+  $max_log_file_size = 10,
+  $max_log_file_action = 'keep_logs',
+  $space_left_action = 'email',
+  $action_mail_account = 'root',
+  $admin_space_left_action = 'halt'
 ){
 
   # TODO: Find setuid binaries and check if they're being monitored by auditd
@@ -16,16 +21,16 @@ class toughen::auditing (
           }
         }
         default: {
-          fail("Version ${::operatingsystemmajrelease} of RedHat is not supported")
+          fail("Version ${::operatingsystemmajrelease} of RedHat/CentOS is not supported")
         }
       }
 
       class { 'auditd':
-        max_log_file            => 10,
-        max_log_file_action     => 'keep_logs',
-        space_left_action       => 'email',
-        action_mail_acct        => 'root',
-        admin_space_left_action => 'halt',
+        max_log_file            => $max_log_file_size,
+        max_log_file_action     => $max_log_file_action,
+        space_left_action       => $space_left_action,
+        action_mail_acct        => $action_mail_account,
+        admin_space_left_action => $admin_space_left_action,
       }
 
       $rules = [
