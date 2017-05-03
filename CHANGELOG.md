@@ -2,6 +2,10 @@
 All notable changes to the project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.2.0] - 2017-05-03
+- Adds in a custom fact that finds binaries with the setuid flag, and tracks them under auditd.
+- 100% STIG compliance for Auditd, the 'Systme Accounting with auditd' section.
+
 ## [0.1.2] - 2017-05-03
 - Forgot to bump the metadata.json version to match the tag. Doh!
 
