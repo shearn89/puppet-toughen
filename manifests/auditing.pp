@@ -90,7 +90,8 @@ class toughen::auditing (
       }
 
       # Use the custom fact defined in lib/facts/privileged_commands.rb:
-      toughen::audit_priv_command { $::privileged_commands: }
+      $binary_array = split($::privileged_commands, ',')
+      toughen::audit_priv_command { $binary_array: }
     }
     default: {
       fail("OS ${::operatingsystem} is not supported")
