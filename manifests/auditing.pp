@@ -5,7 +5,8 @@ class toughen::auditing (
   $max_log_file_action = 'keep_logs',
   $space_left_action = 'email',
   $action_mail_account = 'root',
-  $admin_space_left_action = 'halt'
+  $admin_space_left_action = 'halt',
+  $flush = 'data'
 ){
 
   # TODO: Find setuid binaries and check if they're being monitored by auditd
@@ -31,6 +32,7 @@ class toughen::auditing (
         space_left_action       => $space_left_action,
         action_mail_acct        => $action_mail_account,
         admin_space_left_action => $admin_space_left_action,
+        flush                   => $flush,
       }
 
       $rules = [
