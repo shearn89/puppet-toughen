@@ -18,13 +18,9 @@ describe 'toughen::auditing' do
     end
 
     context 'with supported version' do
-        let (:facts) do {
-          :osfamily => 'redhat',
-          :operatingsystem => 'CentOS',
-          :operatingsystemmajrelease => '7',
-          :privileged_commands => ['/usr/bin/fakebin'],
-        } end
+        let(:facts) do { :privileged_commands => ['/usr/bin/fakebin'] } end
         it { should contain_kernel_parameter('audit') }
+        it { should contain_auditd__rule("-a always,exit -F path='/usr/bin/fakebin' -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged") }
     end
 
 end
