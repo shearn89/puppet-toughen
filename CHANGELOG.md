@@ -2,6 +2,10 @@
 All notable changes to the project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.4.0] - 2017-05-04
+- Adds cron config
+- Fixes some noisy service calls
+
 ## [0.3.0] - 2017-05-04
 - Adds SSH configuration
 - Adds legacy services lock down

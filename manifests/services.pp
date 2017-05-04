@@ -74,9 +74,18 @@ class toughen::services (
       }
 
       if $rpc_disabled {
-        service { 'rpcbind':
-          ensure => 'stopped',
-          enable => false,
+        # Note there's a bug that means puppet doesn't understand 'indirect' services:
+        # https://tickets.puppetlabs.com/browse/PUP-6759
+        service { 'rpcbind.service':
+          ensure   => 'stopped',
+          enable   => true,
+          provider => 'systemd',
+        }
+
+        service { 'rpcbind.socket':
+          ensure   => 'stopped',
+          enable   => false,
+          provider => 'systemd',
         }
       }
 
