@@ -16,11 +16,7 @@ class toughen::services (
   $proxy_disabled = true,
   $snmp_disabled = true,
   $mta_local = true,
-  $nis_disabled = true,
-  $rsh_disabled = true,
-  $tftp_disabled = true,
   $rsync_disabled = true,
-  $talk_disabled = true,
 ){
 
   if $dhcp_disabled {
@@ -271,31 +267,10 @@ class toughen::services (
 	}
       } 
       
-      if $nis_disabled {
-        package { [
-	]: 
-	  ensure => 'absent',
-	}
-      } 
-
-      if $rsh_disabled {
-        package { [
-	]: 
-	  ensure => 'absent',
-	}
-      } 
-
-      if $tftp_disabled {
-        package { [
-	]: 
-	  ensure => 'absent',
-	}
-      } 
-
       if $rsync_disabled {
-        package { [
-	]: 
-	  ensure => 'absent',
+	service { 'rsyncd':
+	  ensure => 'stopped',
+	  enable => false,
 	}
       } 
     }
