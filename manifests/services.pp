@@ -253,7 +253,7 @@ class toughen::services (
         }
         exec { 'compile_sendmail_config':
           command      => '/usr/bin/m4 /etc/mail/sendmail.mc > /etc/mail/sendmail.cf',
-          refresh_only => true,
+          refreshonly => true,
           subscribe    => File_line['sendmail_local_only'],
         }
         service { 'sendmail':
