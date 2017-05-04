@@ -66,7 +66,7 @@ class toughen::legacy_services (
     }
 
     # Make sure the legacy services are still disabled
-    $legacy_files = [ 
+    $legacy_files = [
       '/etc/xinetd.d/rsh-server',
       '/etc/xinetd.d/rsh',
       '/etc/xinetd.d/ypbind',

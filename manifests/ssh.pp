@@ -26,7 +26,7 @@ class toughen::ssh (
   $allow_users = [],
   $allow_groups = [],
   $deny_users = [],
-  $deny_groups = []
+  $deny_groups = [],
   $banner = '/etc/issue.net',
   $password_authentication = 'yes',
   $gssapi_authentication = 'no',
@@ -38,7 +38,7 @@ class toughen::ssh (
   $use_privilege_seperation = 'yes',
   $compression = 'no',
   $use_dns = 'yes',
-  $permit_tunnel = 'no',
+  $permit_tunnel = 'no'
 ){
   case $::osfamily {
     'redhat': {
@@ -55,24 +55,24 @@ class toughen::ssh (
 
   if $port != 22 {
     selinux::port { 'ssh_port':
-      ensure =>'present',
-      seltype => 'ssh_port_t',
+      ensure   =>'present',
+      seltype  => 'ssh_port_t',
       protocol => 'tcp',
-      port => $port,
+      port     => $port,
     }
   }
 
   file { '/etc/ssh/sshd_config':
-    ensure => file,
-    owner => 'root',
-    group => 'root',
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
     content => template('toughen/sshd_config.erb'),
     require => Package[$package_name],
   }
 
   service { 'sshd':
-    ensure => running,
-    enable => true,
+    ensure    => running,
+    enable    => true,
     subscribe => File['/etc/ssh/sshd_config']
   }
 
