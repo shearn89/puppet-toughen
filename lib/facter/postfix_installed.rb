@@ -3,6 +3,7 @@ Facter.add(:postfix_installed) do
   confine :kernel => "Linux"
 
   setcode do
-    File.file?('/etc/postfix/main.cf')
+    result = File.file?('/etc/postfix/main.cf') ? 'true' : 'false'
+    result
   end
 end

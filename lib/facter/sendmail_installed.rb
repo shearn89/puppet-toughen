@@ -3,6 +3,7 @@ Facter.add(:sendmail_installed) do
   confine :kernel => "Linux"
 
   setcode do
-    File.file?('/etc/mail/sendmail.mc')
+    result = File.file?('/etc/mail/sendmail.mc') ? 'true' : 'false'
+    result
   end
 end
