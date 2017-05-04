@@ -12,17 +12,19 @@ Because I don't have Jira.
 * -process-
 * *mandatory access* - need to check grub.conf
 * -banners-
-* *legacy services* - postfix, ntp
-* -services-
+* -legacy services-
+* *services*
 * -network-
 * -auditing-
 * rsyslog
 * cron
-* ssh
+* -ssh- firewall?
 * pam
 * perms owners
 * user env
 * shadow
+* ntp?
+* postfix?
 
 ## System Testing ##
 

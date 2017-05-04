@@ -2,6 +2,11 @@
 All notable changes to the project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.3.0] - 2017-05-04
+- Adds SSH configuration
+- Adds legacy services lock down
+- Adds regular services lock down, with params to control e.g. http install.
+
 ## [0.2.0] - 2017-05-03
 - Adds in a custom fact that finds binaries with the setuid flag, and tracks them under auditd.
 - 100% STIG compliance for Auditd, the 'Systme Accounting with auditd' section.
