@@ -17,7 +17,7 @@
     {"name":"herculesteam-augeasproviders_grub"},
     {"name":"kemra102-auditd"},
     {"name":"puppetlabs-concat"},
-    {"name":"puppet-selinux", "version_requirement":"0.7.1"},
+    {"name":"puppet-selinux", "version_requirement":"0.7.1"}
   ],
   "data_provider": null
 }

@@ -28,12 +28,11 @@ class toughen::services (
 
   case $::osfamily {
     'redhat': {
-
       if $x_disabled {
         package { 'xorg-x11*':
           ensure => 'absent',
         }
-      } 
+      }
 
       if $avahi_disabled {
         service { 'avahi-daemon':
@@ -48,116 +47,116 @@ class toughen::services (
           enable => false,
         }
       }
-      
+
       if $dhcp_disabled {
         service { 'dhcpd':
           ensure => 'stopped',
           enable => false,
-	}
+        }
 
-	package { 'dhcp':
-	  ensure => 'absent',
-	}
+        package { 'dhcp':
+          ensure => 'absent',
+        }
       }
 
       if $ldap_disabled {
         service { 'slapd':
           ensure => 'stopped',
           enable => false,
-	}
-	
-	package { 'openldap-servers':
-	  ensure => 'absent',
-	}
+        }
+
+        package { 'openldap-servers':
+          ensure => 'absent',
+        }
       }
 
       if $nfs_disabled {
         service { 'nfs':
           ensure => 'stopped',
           enable => false,
-	}
-	package { 'nfs-ganesha*':
-	  ensure => 'absent',
-	}
+        }
+        package { 'nfs-ganesha*':
+          ensure => 'absent',
+        }
       }
 
       if $rpc_disabled {
         service { 'rpcbind':
           ensure => 'stopped',
           enable => false,
-	}
-	package { 'rpcbind':
-	  ensure => 'absent',
-	}
+        }
+        package { 'rpcbind':
+          ensure => 'absent',
+        }
       }
 
       if $dns_disabled {
-	package { [
-	  'bind',
-	  'dnsjava',
-	  'dnsmasq',
-	  'iodine',
-	  'iodine-server',
-	  'ipa-server-dns',
-	  'kea',
-	  'knot',
-	  'nsd',
-	  'pdns',
-	  'perl-Net-DNS-Nameserver',
-	  'yadifa' ]:
-	  ensure => 'absent',
-	}
+        package { [
+          'bind',
+          'dnsjava',
+          'dnsmasq',
+          'iodine',
+          'iodine-server',
+          'ipa-server-dns',
+          'kea',
+          'knot',
+          'nsd',
+          'pdns',
+          'perl-Net-DNS-Nameserver',
+          'yadifa' ]:
+          ensure => 'absent',
+        }
       }
 
       if $ftp_disabled {
-	package { [
-	  'globus-gridftp-server',
-	  'jglobus-gridftp',
-	  'krb5-appl-servers',
-	  'nordugrid-arc-gridftpd',
-	  'perl-ftpd',
-	  'perl-Net-FTPServer',
-	  'proftpd',
-	  'pure-ftpd',
-	  'vsftpd' ]:
-	  ensure => 'absent',
-	}
+        package { [
+          'globus-gridftp-server',
+          'jglobus-gridftp',
+          'krb5-appl-servers',
+          'nordugrid-arc-gridftpd',
+          'perl-ftpd',
+          'perl-Net-FTPServer',
+          'proftpd',
+          'pure-ftpd',
+          'vsftpd' ]:
+          ensure => 'absent',
+        }
       }
 
-      if $http_disabled [
-	package { [
-	  'darkhttpd',
+      if $http_disabled {
+        package { [
+          'darkhttpd',
           'erlang-inets',
           'ghc-happstack-server',
           'ghc-warp',
-	  'httpd',
-	  'jetty-http',
+          'httpd',
+          'jetty-http',
           'jetty-websocket-server',
-	  'lighttpd',
+          'lighttpd',
           'nikto',
           'nodejs-faye-websocket',
           'nodejs-ws',
-	  'opensips-httpd',
-	  'perl-HTTP-Daemon',
-	  'perl-HTTP-Daemon-SSL',
-	  'perl-HTTP-Server-Simple',
-	  'perl-HTTP-Soup',
-	  'php-react-http',
+          'opensips-httpd',
+          'perl-HTTP-Daemon',
+          'perl-HTTP-Daemon-SSL',
+          'perl-HTTP-Server-Simple',
+          'perl-HTTP-Soup',
+          'php-react-http',
           'python34-tornado',
           'python-tornado',
           'python-twisted-web',
-	  'qhttpengine',
-	  'root-net-http',
+          'qhttpengine',
+          'root-net-http',
           'rubygem-rack',
           'rubygem-thin',
-	  'slowhttptest',
-	  'wbox',
+          'slowhttptest',
+          'wbox',
           'xbean',
           'xsp',
           'yawn-server',
           'yaws' ]:
-	  ensure => 'absent',
-	}
+          ensure => 'absent',
+        }
       }
 
       if $mail_disabled {
@@ -167,10 +166,10 @@ class toughen::services (
           'imapsync',
           'perdition',
           'php-horde-imp',
-          'uw-imap' ]: 
-	  ensure => 'absent',
-	}
-      } 
+          'uw-imap' ]:
+          ensure => 'absent',
+        }
+      }
 
       if $samba_disabled {
         package { [
@@ -179,10 +178,10 @@ class toughen::services (
           'samba-client',
           'samba-common',
           'samba-dc',
-          'samba' ]: 
-	  ensure => 'absent',
-	}
-      } 
+          'samba' ]:
+          ensure => 'absent',
+        }
+      }
 
       if $proxy_disabled {
         package { [
@@ -213,66 +212,66 @@ class toughen::services (
           'sshuttle',
           'tinyproxy',
           'trafficserver',
-          'up-imapproxy' ]: 
-	  ensure => 'absent',
-	}
-      } 
+          'up-imapproxy' ]:
+          ensure => 'absent',
+        }
+      }
 
       if $snmp_disabled {
         package { [
-	  'net-snmp',
-	]: 
-	  ensure => 'absent',
-	}
-      } 
+          'net-snmp',
+        ]:
+          ensure => 'absent',
+        }
+      }
 
       if $mta_local {
         # POSTFIX
-        exec { "check_postfix":
+        exec { 'check_postfix':
           command => '/bin/true',
-          onlyif => '/usr/bin/test -e /etc/postfix/main.cf',
+          onlyif  => '/usr/bin/test -e /etc/postfix/main.cf',
         }
-	file_line { 'postfix_local_only':
-	  path => '/etc/postfix/main.cf',
-	  line => 'inet_interfaces = localhost',
-	  match => '^inet_interface',
-	  require => Exec['check_postfix'],
-	}
-	service { 'postfix':
-	  ensure => 'running',
-	  enable => true,
-	  subscribe => File_line['postfix_local_only'],
-	}
+        file_line { 'postfix_local_only':
+          path    => '/etc/postfix/main.cf',
+          line    => 'inet_interfaces = localhost',
+          match   => '^inet_interface',
+          require => Exec['check_postfix'],
+        }
+        service { 'postfix':
+          ensure    => 'running',
+          enable    => true,
+          subscribe => File_line['postfix_local_only'],
+        }
 
         # SENDMAIL
-        exec { "check_sendmail":
+        exec { 'check_sendmail':
           command => '/bin/true',
-          onlyif => '/usr/bin/test -e /etc/mail/sendmail.mc',
+          onlyif  => '/usr/bin/test -e /etc/mail/sendmail.mc',
         }
-	file_line { 'sendmail_local_only':
-	  path => '/etc/mail/sendmail.mc',
-	  line => "DAEMON_OPTIONS(`Port=smtp,Addr=127.0.0.1, Name=MTA')dnl",
-	  match => '^DAEMON_OPTIONS',
-	  require => Exec['check_sendmail'],
-	}
-	exec { 'compile_sendmail_config':
-	  command => '/usr/bin/m4 /etc/mail/sendmail.mc > /etc/mail/sendmail.cf',
-	  refresh_only => true,
-	  subscribe => File_line['sendmail_local_only'],
-	}
-	service { 'sendmail':
-	  ensure => 'running',
-	  enable => true,
-	  subscribe => Exec['compile_sendmail_config'],
-	}
-      } 
-      
+        file_line { 'sendmail_local_only':
+          path    => '/etc/mail/sendmail.mc',
+          line    => "DAEMON_OPTIONS(`Port=smtp,Addr=127.0.0.1, Name=MTA')dnl",
+          match   => '^DAEMON_OPTIONS',
+          require => Exec['check_sendmail'],
+        }
+        exec { 'compile_sendmail_config':
+          command      => '/usr/bin/m4 /etc/mail/sendmail.mc > /etc/mail/sendmail.cf',
+          refresh_only => true,
+          subscribe    => File_line['sendmail_local_only'],
+        }
+        service { 'sendmail':
+          ensure    => 'running',
+          enable    => true,
+          subscribe => Exec['compile_sendmail_config'],
+        }
+      }
+
       if $rsync_disabled {
-	service { 'rsyncd':
-	  ensure => 'stopped',
-	  enable => false,
-	}
-      } 
+        service { 'rsyncd':
+          ensure => 'stopped',
+          enable => false,
+        }
+      }
     }
     default: {
       fail("${::osfamily} not supported")
