@@ -19,7 +19,7 @@ class toughen::ssh (
   $permit_empty_passwords = 'no',
   $permit_user_env = 'no',
   $ciphers = [ 'aes256-ctr', 'aes192-ctr', 'aes128-ctr' ],
-  $macs = [ 'hmac-sha2-512', 'hmac-sha2-256'],
+  $macs = [ 'hmac-sha2-512-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'umac-128-etm@openssh.com', 'hmac-sha2-512', 'hmac-sha2-256', 'umac-128@openssh.com' ],
   $client_alive_interval = 300,
   $client_alive_count_max = 0,
   $login_grace_time = 60,
