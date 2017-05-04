@@ -78,16 +78,12 @@ class toughen::services (
           ensure => 'stopped',
           enable => false,
         }
-        package { 'rpcbind':
-          ensure => 'absent',
-        }
       }
 
       if $dns_disabled {
         package { [
           'bind',
           'dnsjava',
-          'dnsmasq',
           'iodine',
           'iodine-server',
           'ipa-server-dns',
@@ -98,6 +94,11 @@ class toughen::services (
           'perl-Net-DNS-Nameserver',
           'yadifa' ]:
           ensure => 'absent',
+        }
+
+        service { 'dnsmasq':
+          ensure => 'stopped',
+          enable => false,
         }
       }
 
@@ -221,45 +222,37 @@ class toughen::services (
       }
 
       if $mta_local {
-        # TODO: better way of doing this. Facts?
-        # POSTFIX
-        exec { 'check_postfix':
-          command => '/bin/true',
-          onlyif  => '/usr/bin/test -e /etc/postfix/main.cf',
-        }
-        file_line { 'postfix_local_only':
-          path    => '/etc/postfix/main.cf',
-          line    => 'inet_interfaces = localhost',
-          match   => '^inet_interface',
-          require => Exec['check_postfix'],
-        }
-        service { 'postfix':
-          ensure    => 'running',
-          enable    => true,
-          subscribe => File_line['postfix_local_only'],
+        # Fact defined by this module
+        if str2bool($::postfix_installed) {
+          file_line { 'postfix_local_only':
+            path  => '/etc/postfix/main.cf',
+            line  => 'inet_interfaces = localhost',
+            match => '^inet_interface',
+          }
+          service { 'postfix':
+            ensure    => 'running',
+            enable    => true,
+            subscribe => File_line['postfix_local_only'],
+          }
         }
 
-        # TODO: better way of doing this. Facts?
-        # SENDMAIL
-        exec { 'check_sendmail':
-          command => '/bin/true',
-          onlyif  => '/usr/bin/test -e /etc/mail/sendmail.mc',
-        }
-        file_line { 'sendmail_local_only':
-          path    => '/etc/mail/sendmail.mc',
-          line    => "DAEMON_OPTIONS(`Port=smtp,Addr=127.0.0.1, Name=MTA')dnl",
-          match   => '^DAEMON_OPTIONS',
-          require => Exec['check_sendmail'],
-        }
-        exec { 'compile_sendmail_config':
-          command      => '/usr/bin/m4 /etc/mail/sendmail.mc > /etc/mail/sendmail.cf',
-          refresh_only => true,
-          subscribe    => File_line['sendmail_local_only'],
-        }
-        service { 'sendmail':
-          ensure    => 'running',
-          enable    => true,
-          subscribe => Exec['compile_sendmail_config'],
+        # Fact defined by this module
+        if str2bool($::sendmail_installed) {
+          file_line { 'sendmail_local_only':
+            path  => '/etc/mail/sendmail.mc',
+            line  => "DAEMON_OPTIONS(`Port=smtp,Addr=127.0.0.1, Name=MTA')dnl",
+            match => '^DAEMON_OPTIONS',
+          }
+          exec { 'compile_sendmail_config':
+            command     => '/usr/bin/m4 /etc/mail/sendmail.mc > /etc/mail/sendmail.cf',
+            refreshonly => true,
+            subscribe   => File_line['sendmail_local_only'],
+          }
+          service { 'sendmail':
+            ensure    => 'running',
+            enable    => true,
+            subscribe => Exec['compile_sendmail_config'],
+          }
         }
       }
 

@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 group :test do
     gem 'puppetlabs_spec_helper', :require => false
-    gem 'codeclimate-test-reporter', :require => false
+    gem 'simplecov', :require => false
 end
 
 group :acceptance do
