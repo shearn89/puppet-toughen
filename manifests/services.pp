@@ -223,7 +223,7 @@ class toughen::services (
 
       if $mta_local {
         # Fact defined by this module
-        if $::postfix_installed {
+        if str2bool($::postfix_installed) {
           file_line { 'postfix_local_only':
             path  => '/etc/postfix/main.cf',
             line  => 'inet_interfaces = localhost',
@@ -237,7 +237,7 @@ class toughen::services (
         }
 
         # Fact defined by this module
-        if $::sendmail_installed {
+        if str2bool($::sendmail_installed) {
           file_line { 'sendmail_local_only':
             path  => '/etc/mail/sendmail.mc',
             line  => "DAEMON_OPTIONS(`Port=smtp,Addr=127.0.0.1, Name=MTA')dnl",
