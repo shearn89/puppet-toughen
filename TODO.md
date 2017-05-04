@@ -13,7 +13,7 @@ Because I don't have Jira.
 * *mandatory access* - need to check grub.conf
 * -banners-
 * -legacy services-
-* *services*
+* -services-
 * -network-
 * -auditing-
 * rsyslog
@@ -24,7 +24,6 @@ Because I don't have Jira.
 * user env
 * shadow
 * ntp?
-* postfix?
 
 ## System Testing ##
 
@@ -36,4 +35,4 @@ Because I don't have Jira.
 
 ## Way down the list ##
 
-* Set up CI (concourse?) and do actual testing on the supported OS(s).
+* Set up CI (concourse?) and do actual testing on the supported OS(s) via packer?
