@@ -14,16 +14,16 @@ class toughen::cron (
       '/etc/cron.monthly'
     ]:
     ensure => file,
-    owner => 'root',
-    group => 'root',
-    mode => '0600',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0600',
   }
 
   file { '/etc/cron.d':
     ensure => directory,
-    owner => 'root',
-    group => 'root',
-    mode => '0700',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0700',
   }
 
   file { ['/etc/cron.deny', '/etc/at.deny']:
@@ -31,10 +31,10 @@ class toughen::cron (
   }
 
   file { ['/etc/cron.allow', '/etc/at.allow']:
-    ensure => file,
-    content => template('schedulers.allow.erb')
-    owner => 'root',
-    group => 'root',
-    mode => '0600',
+    ensure  => file,
+    content => template('toughen/schedulers.allow.erb'),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
   }
 }
