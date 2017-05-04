@@ -13,6 +13,7 @@ class toughen::services (
   $http_disabled = true,
   $mail_disabled = true,
   $samba_disabled = true,
+  $proxy_disabled = true,
   $snmp_disabled = true,
   $mta_local = true,
   $nis_disabled = true,
@@ -136,10 +137,7 @@ class toughen::services (
 	  'httpd',
 	  'jetty-http',
           'jetty-websocket-server',
-          'lighttpd',
 	  'lighttpd',
-	  'nghttp2',
-          'nginx',
           'nikto',
           'nodejs-faye-websocket',
           'nodejs-ws',
@@ -157,9 +155,6 @@ class toughen::services (
           'rubygem-rack',
           'rubygem-thin',
 	  'slowhttptest',
-	  'squid',
-	  'tinyproxy',
-	  'trafficserver',
 	  'wbox',
           'xbean',
           'xsp',
@@ -183,39 +178,120 @@ class toughen::services (
 
       if $samba_disabled {
         package { [
-	]: 
+          'cifs-utils',
+          'kdenetwork-fileshare-samba',
+          'samba-client',
+          'samba-common',
+          'samba-dc',
+          'samba' ]: 
 	  ensure => 'absent',
 	}
       } 
+
+      if $proxy_disabled {
+        package { [
+          '3proxy',
+          'connect-proxy',
+          'gssproxy',
+          'guacd',
+          'haproxy',
+          'hitch',
+          'jetty-proxy',
+          'jglobus-myproxy',
+          'jglobus-ssl-proxies',
+          'jglobus-ssl-proxies-tomcat',
+          'mod_proxy_html',
+          'mod_proxy_uwsgi',
+          'nghttp2',
+          'nginx',
+          'nodejs-proxy',
+          'nodejs-tunnel-agent',
+          'perdition',
+          'Pound',
+          'privoxy',
+          'RabbIT',
+          'ratproxy',
+          'resiprocate-repro',
+          'ser2net',
+          'squid',
+          'sshuttle',
+          'tinyproxy',
+          'trafficserver',
+          'up-imapproxy' ]: 
+	  ensure => 'absent',
+	}
+      } 
+
       if $snmp_disabled {
         package { [
+	  'net-snmp',
 	]: 
 	  ensure => 'absent',
 	}
       } 
+
       if $mta_local {
-        # sendmail
-        # postfix
-        # ssmtp
+        # POSTFIX
+        exec { "check_postfix":
+          command => '/bin/true',
+          onlyif => '/usr/bin/test -e /etc/postfix/main.cf',
+        }
+	file_line { 'postfix_local_only':
+	  path => '/etc/postfix/main.cf',
+	  line => 'inet_interfaces = localhost',
+	  match => '^inet_interface',
+	  require => Exec['check_postfix'],
+	}
+	service { 'postfix':
+	  ensure => 'running',
+	  enable => true,
+	  subscribe => File_line['postfix_local_only'],
+	}
+
+        # SENDMAIL
+        exec { "check_sendmail":
+          command => '/bin/true',
+          onlyif => '/usr/bin/test -e /etc/mail/sendmail.mc',
+        }
+	file_line { 'sendmail_local_only':
+	  path => '/etc/mail/sendmail.mc',
+	  line => "DAEMON_OPTIONS(`Port=smtp,Addr=127.0.0.1, Name=MTA')dnl",
+	  match => '^DAEMON_OPTIONS',
+	  require => Exec['check_sendmail'],
+	}
+	exec { 'compile_sendmail_config':
+	  command => '/usr/bin/m4 /etc/mail/sendmail.mc > /etc/mail/sendmail.cf',
+	  refresh_only => true,
+	  subscribe => File_line['sendmail_local_only'],
+	}
+	service { 'sendmail':
+	  ensure => 'running',
+	  enable => true,
+	  subscribe => Exec['compile_sendmail_config'],
+	}
       } 
+      
       if $nis_disabled {
         package { [
 	]: 
 	  ensure => 'absent',
 	}
       } 
+
       if $rsh_disabled {
         package { [
 	]: 
 	  ensure => 'absent',
 	}
       } 
+
       if $tftp_disabled {
         package { [
 	]: 
 	  ensure => 'absent',
 	}
       } 
+
       if $rsync_disabled {
         package { [
 	]: 
