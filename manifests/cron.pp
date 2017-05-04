@@ -6,20 +6,18 @@ class toughen::cron (
     enable => true,
   }
 
-  file { [
-      '/etc/crontab',
-      '/etc/cron.hourly',
-      '/etc/cron.daily',
-      '/etc/cron.weekly',
-      '/etc/cron.monthly'
-    ]:
+  file { '/etc/crontab':
     ensure => file,
     owner  => 'root',
     group  => 'root',
     mode   => '0600',
   }
 
-  file { '/etc/cron.d':
+  file { [ '/etc/cron.d',
+      '/etc/cron.hourly',
+      '/etc/cron.daily',
+      '/etc/cron.weekly',
+      '/etc/cron.monthly' ]:
     ensure => directory,
     owner  => 'root',
     group  => 'root',
