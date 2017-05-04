@@ -75,18 +75,18 @@ class toughen::services (
 
       if $rpc_disabled {
         # Note there's a bug that means puppet doesn't understand 'indirect' services:
-	# https://tickets.puppetlabs.com/browse/PUP-6759
+        # https://tickets.puppetlabs.com/browse/PUP-6759
         service { 'rpcbind.service':
-          ensure => 'stopped',
-          enable => true,
-	  provider => 'systemd',
+          ensure   => 'stopped',
+          enable   => true,
+          provider => 'systemd',
         }
 
         service { 'rpcbind.socket':
-	  ensure => 'stopped',
-	  enable => false,
-	  provider => 'systemd',
-	}
+          ensure   => 'stopped',
+          enable   => false,
+          provider => 'systemd',
+        }
       }
 
       if $dns_disabled {
