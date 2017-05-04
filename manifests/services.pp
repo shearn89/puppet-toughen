@@ -78,16 +78,12 @@ class toughen::services (
           ensure => 'stopped',
           enable => false,
         }
-        package { 'rpcbind':
-          ensure => 'absent',
-        }
       }
 
       if $dns_disabled {
         package { [
           'bind',
           'dnsjava',
-          'dnsmasq',
           'iodine',
           'iodine-server',
           'ipa-server-dns',
@@ -98,6 +94,11 @@ class toughen::services (
           'perl-Net-DNS-Nameserver',
           'yadifa' ]:
           ensure => 'absent',
+        }
+
+        service { 'dnsmasq':
+          ensure => 'stopped',
+          enable => false,
         }
       }
 
