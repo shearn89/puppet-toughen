@@ -97,6 +97,12 @@ describe 'toughen::services' do
 	it { should { contain_service('postfix') and contain_service('sendmail') } }
     end
 
+    context 'with postfix and sendmail uninstalled' do
+	let (:params) do { :mta_local => true } end
+	let (:facts) do { :postfix_installed => false, :sendmail_installed => false } end
+	it { should { contain_service('postfix') and contain_service('sendmail') } }
+    end
+
     context 'with rsync_disabled false' do
 	let (:params) do { :rsync_disabled => false } end
 	it { should_not { contain_service('rsyncd') } }

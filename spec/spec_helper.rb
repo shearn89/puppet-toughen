@@ -1,11 +1,7 @@
-require 'codeclimate-test-reporter'
+require 'simplecov'
 require 'puppetlabs_spec_helper/module_spec_helper'
 
 SimpleCov.start do
-    formatter SimpleCov::Formatter::MultiFormatter.new([
-        SimpleCov::Formatter::HTMLFormatter,
-        CodeClimate::TestReporter::Formatter
-    ])
     add_filter "/vendor/"
     add_filter "/spec/"
 end

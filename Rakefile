@@ -15,9 +15,8 @@ desc 'Validate manifests, templates, and ruby files'
 task :validate do
   manifests = Dir['{manifests,spec/classes,spec/unit}/**/*.pp'].join(' ')
   sh "puppet parser validate --noop #{manifests}"
-  Dir['spec/**/*.rb', 'lib/**/*.rb'].each do |ruby_file|
-    sh "ruby -c #{ruby_file}" unless ruby_file =~ %r{spec/fixtures}
-  end
+  rubyfiles = Dir['spec/**/*.rb', 'lib/**/*.rb'].select{ |a| !(a =~ /fixtures/)}.join(' ')
+  sh "ruby -c #{rubyfiles}"
   Dir['templates/**/*.erb'].each do |template|
     sh "erb -P -x -T '-' #{template} | ruby -c"
   end
