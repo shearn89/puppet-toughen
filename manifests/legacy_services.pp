@@ -58,7 +58,7 @@ class toughen::legacy_services (
   }
 
   # e.g. for Check_MK:
-  if $xinetd_ensure == 'present' {
+  if $xinetd_ensure == 'installed' {
 
     service { 'xinetd':
       ensure => running,

@@ -19,13 +19,6 @@ class toughen::services (
   $rsync_disabled = true,
 ){
 
-  if $dhcp_disabled {
-    $dhcp_pkg_status = 'absent'
-  }
-  if $cups_disabled {
-    $cups_pkg_status = 'absent'
-  }
-
   case $::osfamily {
     'redhat': {
       if $x_disabled {
@@ -146,10 +139,12 @@ class toughen::services (
           'python-tornado',
           'python-twisted-web',
           'qhttpengine',
+          'razor-torquebox',
           'root-net-http',
           'rubygem-rack',
           'rubygem-thin',
           'slowhttptest',
+          'tomcat',
           'wbox',
           'xbean',
           'xsp',
@@ -226,6 +221,7 @@ class toughen::services (
       }
 
       if $mta_local {
+        # TODO: better way of doing this. Facts?
         # POSTFIX
         exec { 'check_postfix':
           command => '/bin/true',
@@ -243,6 +239,7 @@ class toughen::services (
           subscribe => File_line['postfix_local_only'],
         }
 
+        # TODO: better way of doing this. Facts?
         # SENDMAIL
         exec { 'check_sendmail':
           command => '/bin/true',
