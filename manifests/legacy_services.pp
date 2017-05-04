@@ -44,10 +44,21 @@ class toughen::legacy_services (
       'chargen-stream',
       'daytime-dgram',
       'daytime-stream',
+      'discard-dgram',
+      'discard-stream',
       'echo-dgram',
       'echo-stream',
+      'time-dgram',
+      'time-stream',
       'tcpmux-server'
     ]:
       ensure => 'absent'
+  }
+
+  if $xinetd_ensure == 'present' {
+    service { 'xinetd':
+      ensure => running,
+      enable => true,
+    }
   }
 }
