@@ -91,17 +91,17 @@ Subsystem	sftp	/usr/libexec/openssh/sftp-server
 Ciphers <%= @ciphers.map { |c| "#{c.to_s}"}.join(',') %>
 MACs <%= @macs.map { |m| "#{m.to_s}"}.join(',') %>
 
-# User/Group ACs here if present:
-<% if @allow_users.length > 0 -%>
-AllowUsers <%= @allow_users.map { |u| "#{u.to_s}"}.join(' ') %>
-<% end -%>
-<% if @allow_users.length > 0 -%>
-AllowGroups <%= @allow_groups.map { |g| "#{g.to_s}"}.join(' ') %>
-<% end -%>
-<% if @allow_users.length > 0 -%>
+# User/Group ACs here if present, in order of resolution:
+<% if @deny_users.length > 0 -%>
 DenyUsers <%= @deny_users.map { |u| "#{u.to_s}"}.join(' ') %>
 <% end -%>
 <% if @allow_users.length > 0 -%>
+AllowUsers <%= @allow_users.map { |u| "#{u.to_s}"}.join(' ') %>
+<% end -%>
+<% if @deny_groups.length > 0 -%>
 DenyGroups <%= @deny_groups.map { |g| "#{g.to_s}"}.join(' ') %>
+<% end -%>
+<% if @allow_groups.length > 0 -%>
+AllowGroups <%= @allow_groups.map { |g| "#{g.to_s}"}.join(' ') %>
 <% end -%>
 # end
