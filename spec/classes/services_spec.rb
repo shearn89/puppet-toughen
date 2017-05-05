@@ -48,7 +48,11 @@ describe 'toughen::services' do
   
     context 'with rpc_disabled false' do
 	let (:params) do { :rpc_disabled => false } end
-	it { should_not { contain_package('rpcbind') } }
+	it { should_not { contain_service('rpcbind.service') } }
+    end
+    context 'with rpcbind uninstalled' do
+	let (:facts) do { :rpcbind_installed => false } end
+	it { should_not { contain_service('rpcbind.service') } }
     end
   
     context 'with dns_disabled false' do
