@@ -2,6 +2,9 @@
 All notable changes to the project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.5.1] - 2017-05-05
+- Logic was wrong on rpcbind fact
+
 ## [0.5.0] - 2017-05-05
 - Adds permission controls to /etc/shadow and similar
 - Fixes #1 by detecting rpcbind properly
