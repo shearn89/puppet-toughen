@@ -13,8 +13,12 @@
 #  The options to be provided to the /dev/shm mountpoint
 # 
 class toughen::filesystem (
+  $tmp_device = '/dev/mapper/rhel-tmp',
   $tmp_options = 'nodev,nosuid,noexec',
   $tmp_mode = '1777',
+  $var_device = '/dev/mapper/rhel-var',
+  $var_log_device = '/dev/mapper/rhel-var_log',
+  $var_log_audit_device = '/dev/mapper/rhel-var_log_audit',
   $ramdisk_options = 'nodev,nosuid,noexec'
 ){
 
@@ -30,13 +34,27 @@ class toughen::filesystem (
 
   mount {'/tmp':
     options => $tmp_options,
+    device  => $tmp_device,
   }
 
   mount {'/dev/shm':
     options => $ramdisk_options,
   }
 
-  mount { ['/var', '/var/log', '/var/log/audit', '/home', '/opt']:
+  mount { '/var':
+    device  => $var_device,
+    options => 'nodev',
+  }
+  mount { '/var/log':
+    device  => $var_log_device,
+    options => 'nodev',
+  }
+  mount { '/var/log/audit':
+    device  => $var_log_audit_device,
+    options => 'nodev',
+  }
+
+  mount { ['/home', '/opt']:
     options => 'nodev',
   }
 
