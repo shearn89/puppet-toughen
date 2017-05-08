@@ -19,7 +19,8 @@ class toughen::filesystem (
   $var_device = '/dev/mapper/rhel-var',
   $var_log_device = '/dev/mapper/rhel-var_log',
   $var_log_audit_device = '/dev/mapper/rhel-var_log_audit',
-  $ramdisk_options = 'nodev,nosuid,noexec'
+  $ramdisk_options = 'nodev,nosuid,noexec',
+  $fstype = 'ext4',
 ){
 
   validate_re($tmp_options, '^[a-z,]+$')
@@ -33,28 +34,40 @@ class toughen::filesystem (
   }
 
   mount {'/tmp':
+    ensure  => present,
+    fstype  => $fstype,
     options => $tmp_options,
     device  => $tmp_device,
   }
 
   mount {'/dev/shm':
+    ensure  => present,
+    fstype  => $fstype,
     options => $ramdisk_options,
   }
 
   mount { '/var':
+    ensure  => present,
+    fstype  => $fstype,
     device  => $var_device,
     options => 'nodev',
   }
   mount { '/var/log':
+    ensure  => present,
+    fstype  => $fstype,
     device  => $var_log_device,
     options => 'nodev',
   }
   mount { '/var/log/audit':
+    ensure  => present,
+    fstype  => $fstype,
     device  => $var_log_audit_device,
     options => 'nodev',
   }
 
-  mount { ['/home', '/opt']:
+  mount { '/home':
+    ensure  => present,
+    fstype  => $fstype,
     options => 'nodev',
   }
 
