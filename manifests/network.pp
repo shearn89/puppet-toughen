@@ -55,18 +55,11 @@ class toughen::network (
     mode  => '0644',
   }
 
-  if $::operatingsystemmajrelease == 6 {
-    sysctl{ 'kernel.exec-shield': value => '1' }
-  }
-
   sysctl { 'net.ipv4.icmp_ignore_bogus_error_messages':
     value => $ignore_bogus_messages
   }
   sysctl { 'net.ipv4.icmp_ignore_bogus_error_responses':
     value => '1'
-  }
-  sysctl { 'kernel.randomize_va_space':
-    value => '2'
   }
   sysctl { 'net.ipv4.conf.all.send_redirects':
     value => $send_redirects,
@@ -91,9 +84,6 @@ class toughen::network (
   }
   sysctl { 'net.ipv4.conf.all.log_martians':
     value => $log_martians,
-  }
-  sysctl { 'fs.suid_dumpable':
-    value => '0'
   }
   sysctl { 'net.ipv4.icmp_echo_ignore_broadcasts':
     value => $ignore_broadcasts,
