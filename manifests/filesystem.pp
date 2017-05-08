@@ -40,11 +40,11 @@ class toughen::filesystem (
     device  => $tmp_device,
   }
 
-  mount {'/dev/shm':
-    ensure  => present,
-    fstype  => $fstype,
-    options => $ramdisk_options,
-  }
+  # mount {'/dev/shm':
+  #   ensure  => present,
+  #   fstype  => $fstype,
+  #   options => $ramdisk_options,
+  # }
 
   mount { '/var':
     ensure  => present,
