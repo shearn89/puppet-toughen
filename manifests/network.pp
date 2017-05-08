@@ -3,7 +3,7 @@
 # Parameters
 # ----------
 # 
-# * `ignore_bogus_messages`
+# * `ignore_bogus_responses`
 #  Whether to ignore bogus ICMP messages or not.
 #
 # * `send_redirects`
@@ -24,7 +24,7 @@
 # * `ignore_broadcasts`
 #  Whether to ignore ping requests to broadcast addresses.
 class toughen::network (
-  $ignore_bogus_messages = '1',
+  $ignore_bogus_responses = '1',
   $send_redirects = '0',
   $accept_source_route = '0',
   $accept_redirects = '0',
@@ -33,7 +33,7 @@ class toughen::network (
   $ignore_broadcasts = '1'
 ){
 
-  validate_re($ignore_bogus_messages, '[0,1]')
+  validate_re($ignore_bogus_responses, '[0,1]')
   validate_re($send_redirects, '[0,1]')
   validate_re($accept_source_route, '[0,1]')
   validate_re($accept_redirects, '[0,1]')
@@ -55,11 +55,8 @@ class toughen::network (
     mode  => '0644',
   }
 
-  sysctl { 'net.ipv4.icmp_ignore_bogus_error_messages':
-    value => $ignore_bogus_messages
-  }
   sysctl { 'net.ipv4.icmp_ignore_bogus_error_responses':
-    value => '1'
+    value => $ignore_bogus_responses
   }
   sysctl { 'net.ipv4.conf.all.send_redirects':
     value => $send_redirects,
