@@ -2,6 +2,12 @@
 All notable changes to the project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.5.2] - 2017-05-12
+- Fixing filesystem mount parameters
+- Splitting kernel parameters so that network ones are in network.pp
+- Fixing some typos
+- Making travis builds work properly again
+
 ## [0.5.1] - 2017-05-05
 - Logic was wrong on rpcbind fact
 
