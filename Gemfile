@@ -5,10 +5,6 @@ group :test do
     gem 'simplecov', :require => false
 end
 
-group :acceptance do
-    gem 'beaker-rspec'
-end
-
 puppetversion = ENV.key?('PUPPET_VERSION') ? "= #{ENV['PUPPET_VERSION']}" : ['>= 2.7']
 gem 'puppet', puppetversion
 
