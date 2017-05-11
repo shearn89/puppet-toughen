@@ -19,6 +19,7 @@ class toughen::filesystem (
   $var_device = '/dev/mapper/rhel-var',
   $var_log_device = '/dev/mapper/rhel-var_log',
   $var_log_audit_device = '/dev/mapper/rhel-var_log_audit',
+  $ramdisk_present = false,
   $ramdisk_options = 'nodev,nosuid,noexec',
   $fstype = 'ext4',
 ){
@@ -70,6 +71,13 @@ class toughen::filesystem (
     device  => '/tmp',
     fstype  => 'none',
     options => 'bind',
+  }
+
+  if $ramdisk_present {
+    mount { '/dev/shm':
+      ensure  => present,
+      options => $ramdisk_options,
+    }
   }
 
   file {'/tmp':

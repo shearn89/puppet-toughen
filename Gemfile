@@ -15,3 +15,4 @@ gem 'puppet', puppetversion
 gem 'facter'
 gem 'metadata-json-lint'
 gem 'rubocop'
+gem 'json'
