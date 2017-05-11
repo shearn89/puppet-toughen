@@ -10,8 +10,8 @@ describe 'toughen::filesystem' do
     it { should contain_mount('/tmp').with( { 'options' => 'someoptions' } ) }
   end
 
-  context 'with custom ramdisk_options' do
-    let (:params) do { :ramdisk_options => 'someoptions' } end
+  context 'with ramdisk and custom ramdisk_options' do
+    let (:params) do { :ramdisk_present => true, :ramdisk_options => 'someoptions' } end
     it { should contain_mount('/dev/shm').with( { 'options' => 'someoptions' } ) }
   end
 
