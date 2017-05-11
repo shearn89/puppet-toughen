@@ -17,7 +17,7 @@ class toughen::updates (
     'redhat': {
       if $use_gpg {
         augeas { 'enable yum gpgcheck':
-          context => '/files/etc/yum.conf',
+          context => '/files/etc/yum.conf/main',
           changes => [
             'set gpgcheck 1',
           ],

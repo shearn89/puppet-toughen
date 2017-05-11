@@ -172,7 +172,6 @@ class toughen::services (
           'cyrus-imapd',
           'dovecot',
           'imapsync',
-          'perdition',
           'php-horde-imp',
           'uw-imap' ]:
           ensure => 'absent',

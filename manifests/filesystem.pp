@@ -13,9 +13,15 @@
 #  The options to be provided to the /dev/shm mountpoint
 # 
 class toughen::filesystem (
+  $tmp_device = '/dev/mapper/rhel-tmp',
   $tmp_options = 'nodev,nosuid,noexec',
   $tmp_mode = '1777',
-  $ramdisk_options = 'nodev,nosuid,noexec'
+  $var_device = '/dev/mapper/rhel-var',
+  $var_log_device = '/dev/mapper/rhel-var_log',
+  $var_log_audit_device = '/dev/mapper/rhel-var_log_audit',
+  $ramdisk_present = false,
+  $ramdisk_options = 'nodev,nosuid,noexec',
+  $fstype = 'ext4',
 ){
 
   validate_re($tmp_options, '^[a-z,]+$')
@@ -29,14 +35,34 @@ class toughen::filesystem (
   }
 
   mount {'/tmp':
+    ensure  => present,
+    fstype  => $fstype,
     options => $tmp_options,
+    device  => $tmp_device,
   }
 
-  mount {'/dev/shm':
-    options => $ramdisk_options,
+  mount { '/var':
+    ensure  => present,
+    fstype  => $fstype,
+    device  => $var_device,
+    options => 'nodev',
+  }
+  mount { '/var/log':
+    ensure  => present,
+    fstype  => $fstype,
+    device  => $var_log_device,
+    options => 'nodev',
+  }
+  mount { '/var/log/audit':
+    ensure  => present,
+    fstype  => $fstype,
+    device  => $var_log_audit_device,
+    options => 'nodev',
   }
 
-  mount { ['/var', '/var/log', '/var/log/audit', '/home', '/opt']:
+  mount { '/home':
+    ensure  => present,
+    fstype  => $fstype,
     options => 'nodev',
   }
 
@@ -45,6 +71,13 @@ class toughen::filesystem (
     device  => '/tmp',
     fstype  => 'none',
     options => 'bind',
+  }
+
+  if $ramdisk_present {
+    mount { '/dev/shm':
+      ensure  => present,
+      options => $ramdisk_options,
+    }
   }
 
   file {'/tmp':

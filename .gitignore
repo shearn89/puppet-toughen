@@ -1,3 +1,6 @@
 Gemfile.lock
 spec/fixtures/
 coverage/
+.ruby-version
+.bundle
+vendor/
