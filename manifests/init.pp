@@ -83,6 +83,9 @@ class toughen {
   class { 'toughen::services': }
   contain toughen::services
 
+  class { 'toughen::ntp': }
+  contain toughen::ntp
+
   # 3
   class { 'toughen::network': }
   contain toughen::network
