@@ -117,8 +117,8 @@ class toughen {
   class { 'toughen::ssh': }
   contain toughen::ssh
 
-  class { 'toughen::sssd': }
-  contain toughen::sssd
+  # class { 'toughen::sssd': }
+  # contain toughen::sssd
 
   # 5.3
   class { 'toughen::pam': }
