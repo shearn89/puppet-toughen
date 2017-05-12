@@ -93,7 +93,7 @@ class toughen::auditing (
 
       # Use the custom fact defined by this module
       $binary_array = split($::privileged_commands, ',')
-      toughen::audit_priv_command { $binary_array: }
+      toughen::defines::audit_priv_command { $binary_array: }
     }
     default: {
       fail("OS ${::operatingsystem} is not supported")
