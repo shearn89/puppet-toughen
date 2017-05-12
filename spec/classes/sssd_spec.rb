@@ -17,13 +17,14 @@ describe 'toughen::sssd' do
     it { should compile }
     it { should contain_package('sssd') }
     it { should contain_service('sssd').with(:ensure => 'running') }
-    it { should contain_augeas('sssd-security') }
-    it { should contain_file('/etc/sssd/sssd.conf') }
+    it { should_not contain_augeas('sssd-security') }
+    it { should_not contain_file('/etc/sssd/sssd.conf') }
   end
 
-  context 'with touch_config false' do
-    let (:params) do { :touch_config => false } end
-    it { should_not contain_file('/etc/sssd/sssd.conf') }
+  context 'with touch_config true' do
+    let (:params) do { :touch_config => true } end
+    it { should contain_augeas('sssd-security') }
+    it { should contain_file('/etc/sssd/sssd.conf') }
   end
 
 end

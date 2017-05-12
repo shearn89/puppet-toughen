@@ -4,7 +4,7 @@
 # ----------
 #
 class toughen::sssd (
-  $touch_config = true,
+  $touch_config = false,
   $memcache_timeout = 86400,
   $offline_cred_expiry = 1,
   $known_hosts_timeout = 86400,
@@ -26,25 +26,26 @@ class toughen::sssd (
       group   => 'root',
       mode    => '0600',
       require => Package['sssd'],
-      before  => Augeas['sssd-security'],
     }
-  }
 
-  augeas { 'sssd-security':
-    context => '/files/etc/sssd/sssd.conf',
-    changes => [
-      "set dir[. = '/nss'] /nss",
-      "set dir[. = '/nss']/memcache_timeout ${memcache_timeout}",
-      "set dir[. = '/nss']/offline_credentials_expiration ${offline_cred_expiry}",
-      "set dir[. = '/nss']/ssh_known_hosts_timeout ${known_hosts_timeout}"
-    ],
-    require => Package['sssd'],
+    augeas { 'sssd-security':
+      context => '/files/etc/sssd/sssd.conf',
+      changes => [
+        "set dir[. = '/nss'] /nss",
+        "set dir[. = '/nss']/memcache_timeout ${memcache_timeout}",
+        "set dir[. = '/nss']/offline_credentials_expiration ${offline_cred_expiry}",
+        "set dir[. = '/nss']/ssh_known_hosts_timeout ${known_hosts_timeout}"
+      ],
+      require => File['/etc/sssd/sssd.conf'],
+      before  => Service['sssd'],
+    }
+
   }
 
   service { 'sssd':
-    ensure    => 'running',
-    enable    => true,
-    subscribe => Augeas['sssd-security'],
+    ensure  => 'running',
+    enable  => true,
+    require => Package['sssd'],
   }
 
 }
