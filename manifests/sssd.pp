@@ -4,6 +4,7 @@
 # ----------
 #
 class toughen::sssd (
+  $touch_config = true,
   $memcache_timeout = 86400,
   $offline_cred_expiry = 1,
   $known_hosts_timeout = 86400,
@@ -12,9 +13,21 @@ class toughen::sssd (
   validate_integer($memcache_timeout)
   validate_integer($offline_cred_expiry)
   validate_integer($known_hosts_timeout)
+  validate_bool($touch_config)
 
   package { 'sssd':
     ensure => 'installed',
+  }
+
+  if $touch_config {
+    file { '/etc/sssd/sssd.conf':
+      ensure  => file,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0600',
+      require => Package['sssd'],
+      before  => Augeas['sssd-security'],
+    }
   }
 
   augeas { 'sssd-security':
