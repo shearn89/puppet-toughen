@@ -25,6 +25,9 @@ Because I don't have Jira.
 * shadow
 * ntp?
 
+* Root logins
+* SSSD
+
 ## System Testing ##
 
 * Flesh out the system tests so it's more than parameter checking.

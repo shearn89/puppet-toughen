@@ -51,6 +51,9 @@ class toughen {
   class { 'toughen::filesystem': }
   contain toughen::filesystem
 
+  class { 'toughen::modprobe': }
+  contain toughen::modprobe
+
   # 1.2
   class { 'toughen::updates': }
   contain toughen::updates
@@ -83,6 +86,9 @@ class toughen {
   class { 'toughen::services': }
   contain toughen::services
 
+  class { 'toughen::ntp': }
+  contain toughen::ntp
+
   # 3
   class { 'toughen::network': }
   contain toughen::network
@@ -110,6 +116,9 @@ class toughen {
   # 5.2
   class { 'toughen::ssh': }
   contain toughen::ssh
+
+  # class { 'toughen::sssd': }
+  # contain toughen::sssd
 
   # 5.3
   class { 'toughen::pam': }
