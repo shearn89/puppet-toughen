@@ -2,7 +2,18 @@
 All notable changes to the project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [0.5.2] - 2017-05-12
+## [0.6.0] - 2017-05-12
+- Tried (and failed) to add an SSSD class. Needs work on a box with SSSD configured.
+- Enabling the audisp syslog plugin for auditd
+- Disabling `zeroconf`
+- **New class** - `modprobe`. Unifies blacklisted modules from `filesystem` and `network`.
+- Extra network parameters for sysctl
+- Initializing aide
+- Updating yum.conf with gpg checks etc
+- Adding reasonably accurate policy for scanning with oscap tools
+- Moved defined types to a folder
+
+## [0.5.2] - 2017-05-11
 - Fixing filesystem mount parameters
 - Splitting kernel parameters so that network ones are in network.pp
 - Fixing some typos
