@@ -70,7 +70,7 @@ class toughen::network (
 
   augeas { 'no-zeroconf':
     context => '/files/etc/sysconfig/network',
-    changes => 'set NOZEROFCONF yes',
+    changes => 'set NOZEROCONF yes',
   }
 
   # Sysctl params here
