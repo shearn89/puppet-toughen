@@ -4,7 +4,7 @@ describe 'toughen::filesystem' do
   context 'with default parameters' do
     it { 
       should contain_file('/tmp').with( { 'mode' => '1777'} )
-      should contain_kernel_parameter('nousb')
+      should_not contain_kernel_parameter('nousb')
       should contain_sysctl('kernel.dmesg_restrict')
     }
   end
@@ -39,9 +39,9 @@ describe 'toughen::filesystem' do
     it { expect { should raise_error(Puppet::Error) } }
   end
 
-  context 'without usb disabled' do
-    let (:params) do { :usb_disabled => false } end
-    it { should_not contain_kernel_parameter('nousb') }
+  context 'with usb disabled' do
+    let (:params) do { :usb_disabled => true } end
+    it { should contain_kernel_parameter('nousb') }
   end
 
   context 'without dmesg disabled' do

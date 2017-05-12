@@ -46,7 +46,7 @@ class toughen::filesystem (
   $ramdisk_present = false,
   $ramdisk_options = 'nodev,nosuid,noexec',
   $fstype = 'ext4',
-  $usb_disabled = true,
+  $usb_disabled = false,
   $restrict_dmesg = true,
 ){
 
