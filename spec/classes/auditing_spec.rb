@@ -19,6 +19,7 @@ describe 'toughen::auditing' do
 
     context 'with supported version' do
         let(:facts) do { :privileged_commands => '/usr/bin/fakebin1,/usr/bin/fakebin2' } end
+        it { should compile }
         it { should contain_kernel_parameter('audit') }
         it { should contain_auditd__rule("-a always,exit -F path=/usr/bin/fakebin1 -F perm=x -F auid>=1000 -F auid!=4294967295 -k privileged") }
     end

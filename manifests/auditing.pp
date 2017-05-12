@@ -34,6 +34,7 @@ class toughen::auditing (
         admin_space_left_action => $admin_space_left_action,
         flush                   => $flush,
       }
+      include '::auditd::audisp::syslog'
 
       $rules = [
         '-a always,exit -F arch=b64 -S adjtimex -S settimeofday -S stime -k time-change',
@@ -93,7 +94,7 @@ class toughen::auditing (
 
       # Use the custom fact defined by this module
       $binary_array = split($::privileged_commands, ',')
-      toughen::audit_priv_command { $binary_array: }
+      toughen::defines::audit_priv_command { $binary_array: }
     }
     default: {
       fail("OS ${::operatingsystem} is not supported")

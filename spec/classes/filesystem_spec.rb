@@ -2,7 +2,11 @@ require 'spec_helper'
 
 describe 'toughen::filesystem' do
   context 'with default parameters' do
-    it { should contain_file('/tmp').with( { 'mode' => '1777'} ) }
+    it { 
+      should contain_file('/tmp').with( { 'mode' => '1777'} )
+      should_not contain_kernel_parameter('nousb')
+      should contain_sysctl('kernel.dmesg_restrict')
+    }
   end
 
   context 'with custom tmp_options' do
@@ -33,5 +37,15 @@ describe 'toughen::filesystem' do
   context 'with invalid tmp_mode' do
     let (:params) do { :tmp_mode => 'invalid' } end
     it { expect { should raise_error(Puppet::Error) } }
+  end
+
+  context 'with usb disabled' do
+    let (:params) do { :usb_disabled => true } end
+    it { should contain_kernel_parameter('nousb') }
+  end
+
+  context 'without dmesg disabled' do
+    let (:params) do { :restrict_dmesg => false } end
+    it { should_not contain_sysctl('kernel.dmesg_restrict') }
   end
 end

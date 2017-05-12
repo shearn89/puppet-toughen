@@ -18,8 +18,8 @@ class toughen::ssh (
   $permit_root_login = 'no',
   $permit_empty_passwords = 'no',
   $permit_user_env = 'no',
-  $ciphers = [ 'aes256-ctr', 'aes192-ctr', 'aes128-ctr' ],
-  $macs = [ 'hmac-sha2-512-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'umac-128-etm@openssh.com', 'hmac-sha2-512', 'hmac-sha2-256', 'umac-128@openssh.com' ],
+  $ciphers = [ 'aes128-ctr', 'aes192-ctr', 'aes256-ctr' ],
+  $macs = [ 'hmac-sha2-512', 'hmac-sha2-256' ],
   $client_alive_interval = 300,
   $client_alive_count_max = 0,
   $login_grace_time = 60,
@@ -27,8 +27,9 @@ class toughen::ssh (
   $allow_groups = [],
   $deny_users = [],
   $deny_groups = [],
-  $banner = '/etc/issue.net',
+  $banner = '/etc/issue',
   $password_authentication = 'yes',
+  $kerberos_authentication = 'no',
   $gssapi_authentication = 'no',
   $gssapi_cleanup_credentials = 'no',
   $use_pam = 'yes',
@@ -76,5 +77,9 @@ class toughen::ssh (
     subscribe => File['/etc/ssh/sshd_config']
   }
 
-  # TODO: firewall?
+  exec { 'chown-host-keys':
+    path    => '/bin:/usr/bin:/sbin',
+    command => 'chmod 600 /etc/ssh/ssh_host_*_key',
+    onlyif  => "test $(stat -c %A /etc/ssh/ssh_host_rsa_key | tr -dc 'a-z') != 'rw'",
+  }
 }

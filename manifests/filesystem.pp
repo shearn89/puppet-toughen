@@ -3,14 +3,38 @@
 # Parameters
 # ----------
 # 
+# * `tmp_device`
+#  The /dev path for the fstab /tmp entry
+# 
 # * `tmp_options`
 #  The options to be provided to the /tmp mountpoint
 # 
 # * `tmp_mode`
 #  The numerical mode to be set on /tmp
 #
+# * `var_device`
+#  The /dev path for the fstab /var entry
+#
+# * `var_log_device`
+#  The /dev path for the fstab /var/log entry
+#
+# * `var_log_audit_device`
+#  The /dev path for the fstab /var/log/audit entry
+#
+# * `ramdisk_present`
+#  Whether there's a ramdisk present at all
+# 
 # * `ramdisk_options`
 #  The options to be provided to the /dev/shm mountpoint
+# 
+# * `fstype`
+#  The filesystem in use on e.g. /var, /tmp, etc.
+# 
+# * `usb_disabled`
+#  Whether to add 'nousb' to the kernel params.
+# 
+# * `restrict_dmesg`
+#  Whether to restrict access to dmesg.
 # 
 class toughen::filesystem (
   $tmp_device = '/dev/mapper/rhel-tmp',
@@ -22,6 +46,8 @@ class toughen::filesystem (
   $ramdisk_present = false,
   $ramdisk_options = 'nodev,nosuid,noexec',
   $fstype = 'ext4',
+  $usb_disabled = false,
+  $restrict_dmesg = true,
 ){
 
   validate_re($tmp_options, '^[a-z,]+$')
@@ -70,7 +96,7 @@ class toughen::filesystem (
     ensure  => 'mounted',
     device  => '/tmp',
     fstype  => 'none',
-    options => 'bind',
+    options => 'rw,nodev,noexec,nosuid,bind',
   }
 
   if $ramdisk_present {
@@ -87,4 +113,14 @@ class toughen::filesystem (
     mode   => $tmp_mode,
   }
 
+  if $usb_disabled {
+    kernel_parameter { 'nousb':
+      ensure => present,
+    }
+  }
+  if $restrict_dmesg {
+    sysctl { 'kernel.dmesg_restrict':
+      value => 1
+    }
+  }
 }
