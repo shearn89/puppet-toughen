@@ -5,6 +5,7 @@ script: bundle exec rake test
 branches:
   only:
   - master
+  - staging
   - develop
 env:
 - PUPPET_VERSION=4.10.1
