@@ -17,38 +17,26 @@ describe 'toughen::network' do
         it { should_not { contain_sysctl('kernel.exec-shield').with({ :value => '1'}) } }
     end
 
-    context 'with invalid bogus_messages parameter' do
+    context 'with invalid parameters' do
         let (:params) do { :ignore_bogus_messages => 'invalid' } end
         it { expect { should raise_error(Puppet::Error) } }
-    end
-
-    context 'with invalid send_redirects' do
         let (:params) do { :send_redirects => 'invalid' } end
         it { expect { should raise_error(Puppet::Error) } }
-    end
-
-    context 'with invalid accept_source_route' do
         let (:params) do { :accept_source_route => 'invalid' } end
         it { expect { should raise_error(Puppet::Error) } }
-    end
-
-    context 'with invalid accept_redirects' do
         let (:params) do { :accept_redirects => 'invalid' } end
         it { expect { should raise_error(Puppet::Error) } }
-    end
-
-    context 'with invalid secure_redirects' do
         let (:params) do { :secure_redirects => 'invalid' } end
         it { expect { should raise_error(Puppet::Error) } }
-    end
-
-    context 'with invalid log_martians' do
         let (:params) do { :log_martians => 'invalid' } end
         it { expect { should raise_error(Puppet::Error) } }
-    end
-
-    context 'with invalid ignore_broadcasts' do
         let (:params) do { :ignore_broadcasts => 'invalid' } end
+        it { expect { should raise_error(Puppet::Error) } }
+        let (:params) do { :use_syncookies => 'invalid' } end
+        it { expect { should raise_error(Puppet::Error) } }
+        let (:params) do { :ip_forward => 'invalid' } end
+        it { expect { should raise_error(Puppet::Error) } }
+        let (:params) do { :disable_ipv6 => 'invalid' } end
         it { expect { should raise_error(Puppet::Error) } }
     end
 

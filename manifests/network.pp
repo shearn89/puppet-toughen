@@ -23,6 +23,13 @@
 #
 # * `ignore_broadcasts`
 #  Whether to ignore ping requests to broadcast addresses.
+# 
+# * `use_syncookies`
+#  Whether to use TCP SYN cookies for flood detection.
+#
+# * `ip_forwawrd`
+#  Whether to enable IP forwarding or not
+#
 class toughen::network (
   $ignore_bogus_responses = '1',
   $send_redirects = '0',
@@ -30,7 +37,10 @@ class toughen::network (
   $accept_redirects = '0',
   $secure_redirects = '0',
   $log_martians = '1',
-  $ignore_broadcasts = '1'
+  $ignore_broadcasts = '1',
+  $use_syncookies = '1',
+  $ip_forward = '0',
+  $disable_ipv6 = '1',
 ){
 
   validate_re($ignore_bogus_responses, '[0,1]')
@@ -40,6 +50,9 @@ class toughen::network (
   validate_re($secure_redirects, '[0,1]')
   validate_re($log_martians, '[0,1]')
   validate_re($ignore_broadcasts, '[0,1]')
+  validate_re($use_syncookies, '[0,1]')
+  validate_re($ip_forward, '[0,1]')
+  validate_re($disable_ipv6, '[0,1]')
 
   case $::osfamily {
     'redhat': {}
@@ -79,7 +92,7 @@ class toughen::network (
   sysctl { 'net.ipv4.conf.default.secure_redirects':
     value => $secure_redirects,
   }
-  sysctl { 'net.ipv4.conf.all.log_martians':
+  sysctl { ['net.ipv4.conf.all.log_martians', 'net.ipv4.conf.default.log_martians']:
     value => $log_martians,
   }
   sysctl { 'net.ipv4.icmp_echo_ignore_broadcasts':
@@ -90,5 +103,14 @@ class toughen::network (
   }
   sysctl { 'net.ipv4.tcp_max_syn_backlog':
     value => '4096'
+  }
+  sysctl { 'net.ipv4.tcp_syncookies':
+    value => $use_syncookies,
+  }
+  sysctl { 'net.ipv4.ip_forward':
+    value => $ip_forward,
+  }
+  sysctl { ['net.ipv6.conf.all.disable_ipv6', 'net.ipv6.conf.default.disable_ipv6']:
+    value => $disable_ipv6,
   }
 }
