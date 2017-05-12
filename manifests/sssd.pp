@@ -32,9 +32,12 @@ class toughen::sssd (
 
   augeas { 'sssd-security':
     context => '/files/etc/sssd/sssd.conf',
-    changes => [ "set nss/memcache_timeout ${memcache_timeout}",
-      "set nss/offline_credentials_expiration ${offline_cred_expiry}",
-      "set nss/ssh_known_hosts_timeout ${known_hosts_timeout}" ],
+    changes => [
+      "set dir[. = '/nss'] /nss",
+      "set dir[. = '/nss']/memcache_timeout ${memcache_timeout}",
+      "set dir[. = '/nss']/offline_credentials_expiration ${offline_cred_expiry}",
+      "set dir[. = '/nss']/ssh_known_hosts_timeout ${known_hosts_timeout}"
+    ],
     require => Package['sssd'],
   }
 
