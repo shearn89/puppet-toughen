@@ -39,11 +39,6 @@ describe 'toughen::filesystem' do
     it { expect { should raise_error(Puppet::Error) } }
   end
 
-  context 'with custom blacklist name' do
-    let (:params) do { :blacklist_confname => 'testing' } end
-    it { should contain_file('/etc/modprobe.d/testing.conf') }
-  end
-
   context 'without usb disabled' do
     let (:params) do { :usb_disabled => false } end
     it { should_not contain_kernel_parameter('nousb') }

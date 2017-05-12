@@ -51,6 +51,9 @@ class toughen {
   class { 'toughen::filesystem': }
   contain toughen::filesystem
 
+  class { 'toughen::modprobe': }
+  contain toughen::modprobe
+
   # 1.2
   class { 'toughen::updates': }
   contain toughen::updates

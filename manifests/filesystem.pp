@@ -30,14 +30,6 @@
 # * `fstype`
 #  The filesystem in use on e.g. /var, /tmp, etc.
 # 
-# * `blacklist_modules`
-#  The list of kernel modules to blacklist (/bin/true)
-# 
-# * `blacklist_confname`
-#  The name of the file under /etc/modprobe.d in which
-#  to place the blacklist. Note that this parameter will
-#  have '.conf' appended.
-# 
 # * `usb_disabled`
 #  Whether to add 'nousb' to the kernel params.
 # 
@@ -54,16 +46,6 @@ class toughen::filesystem (
   $ramdisk_present = false,
   $ramdisk_options = 'nodev,nosuid,noexec',
   $fstype = 'ext4',
-  $blacklist_modules = [
-    'usb-storage',
-    'cramfs',
-    'freevxfs',
-    'jffs2',
-    'hfs',
-    'hfsplus',
-    'squashfs',
-    'udf'],
-  $blacklist_confname = 'CIS',
   $usb_disabled = true,
   $restrict_dmesg = true,
 ){
@@ -129,14 +111,6 @@ class toughen::filesystem (
     owner  => root,
     group  => root,
     mode   => $tmp_mode,
-  }
-
-  file { "/etc/modprobe.d/${blacklist_confname}.conf":
-    ensure  => file,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0600',
-    content => template('toughen/modprobe.conf.erb'),
   }
 
   if $usb_disabled {
