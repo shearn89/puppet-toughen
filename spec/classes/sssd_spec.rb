@@ -17,12 +17,7 @@ describe 'toughen::sssd' do
     it { should compile }
     it { should contain_package('sssd') }
     it { should contain_service('sssd').with(:ensure => 'running') }
-    it { should contain_augeas('sssd-security').with(
-      :context => '/files/etc/sssd/sssd.conf/nss',
-      :changes => [ 'set memcache_timeout 86400',
-                    'set offline_credentials_expiration 1',
-                    'set ssh_known_hosts_timeout 86400' ]
-    ) }
+    it { should contain_augeas('sssd-security') }
     it { should contain_file('/etc/sssd/sssd.conf') }
   end
 
