@@ -4,3 +4,4 @@ coverage/
 .ruby-version
 .bundle
 vendor/
+pkg/
