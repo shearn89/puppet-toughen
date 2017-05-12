@@ -9,12 +9,12 @@ describe 'toughen::network' do
 
     context 'on Centos 6' do
         let (:facts) do { :operatingsystemmajrelease => 6 } end
-        it { should { contain_sysctl('kernel.exec-shield').with({ :value => '1'}) } }
+        it { should compile }
     end
 
     context 'on Centos 7' do
         let (:facts) do { :operatingsystemmajrelease => 7 } end
-        it { should_not { contain_sysctl('kernel.exec-shield').with({ :value => '1'}) } }
+        it { should compile }
     end
 
     context 'with invalid parameters' do

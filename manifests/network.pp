@@ -68,6 +68,12 @@ class toughen::network (
     mode  => '0644',
   }
 
+  augeas { 'no-zeroconf':
+    context => '/files/etc/sysconfig/network',
+    changes => 'set NOZEROFCONF yes',
+  }
+
+  # Sysctl params here
   sysctl { 'net.ipv4.icmp_ignore_bogus_error_responses':
     value => $ignore_bogus_responses
   }
