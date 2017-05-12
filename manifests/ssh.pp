@@ -80,6 +80,6 @@ class toughen::ssh (
   exec { 'chown-host-keys':
     path    => '/bin:/usr/bin:/sbin',
     command => 'chmod 600 /etc/ssh/ssh_host_*_key',
-    onlyif  => "[[ $(stat -c %A /etc/ssh/ssh_host_rsa_key | tr -dc 'a-z') != 'rw' ]]",
+    onlyif  => "test $(stat -c %A /etc/ssh/ssh_host_rsa_key | tr -dc 'a-z') != 'rw'",
   }
 }
