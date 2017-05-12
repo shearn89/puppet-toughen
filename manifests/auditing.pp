@@ -34,6 +34,7 @@ class toughen::auditing (
         admin_space_left_action => $admin_space_left_action,
         flush                   => $flush,
       }
+      include '::auditd::audisp::syslog'
 
       $rules = [
         '-a always,exit -F arch=b64 -S adjtimex -S settimeofday -S stime -k time-change',
