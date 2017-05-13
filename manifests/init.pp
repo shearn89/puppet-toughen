@@ -129,8 +129,8 @@ class toughen {
   contain toughen::perms_owners
 
   # 5.4?
-  class { 'toughen::user_env': }
-  contain toughen::user_env
+  class { 'toughen::root_access': }
+  contain toughen::root_access
 
   # 6.1
   class { 'toughen::shadow': }
