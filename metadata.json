@@ -8,7 +8,7 @@
   "project_page": "https://github.com/shearn89/puppet-toughen",
   "issues_url": "https://github.com/shearn89/puppet-toughen",
   "dependencies": [
-    { "name":"puppetlabs-stdlib", "version_requirement": ">= 1.0.0" },
+    { "name":"puppetlabs-stdlib", "version_requirement": ">= 1.0.0 < 2.0.0" },
     { "name":"puppetlabs-firewall", "version_requirement": ">= 1.9.0 < 2.0.0" },
     { "name":"puppetlabs-limits", "version_requirement": ">= 0.1.0 < 1.0.0" },
     { "name":"thias-sysctl", "version_requirement": ">= 1.0.6 < 2.0.0" },
