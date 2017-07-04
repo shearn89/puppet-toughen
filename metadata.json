@@ -1,6 +1,6 @@
 {
   "name": "shearn89-toughen",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "author": "shearn89",
   "summary": "System hardening for Debian, RedHat, and more.",
   "license": "MIT",

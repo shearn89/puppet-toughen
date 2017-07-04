@@ -2,6 +2,10 @@
 All notable changes to the project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.7.0] - 2017-07-04
+- Adding securetty settings
+- Fixing some CI stuff
+
 ## [0.6.0] - 2017-05-12
 - Tried (and failed) to add an SSSD class. Needs work on a box with SSSD configured.
 - Enabling the audisp syslog plugin for auditd
