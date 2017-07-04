@@ -26,17 +26,16 @@ Because I don't have Jira.
 * ntp?
 
 * Root logins
-* SSSD
 
 ## System Testing ##
 
 * Flesh out the system tests so it's more than parameter checking.
-* Fix the travis build!
 
 ## Further work ##
 
+* Produce proper docs using (puppet-strings)[https://github.com/puppetlabs/puppet-strings]
 * Review hardening in line with the **spirit** of the guide, not just the 'checkbox'.
 
 ## Way down the list ##
 
-* Set up CI (concourse?) and do actual testing on the supported OS(s) via packer?
+* Other OSes. Test with Packer/vagrant - vagrant multi node?
