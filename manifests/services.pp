@@ -1,47 +1,47 @@
 # Class: toughen::services
 #
 class toughen::services (
-  $x_disabled = true,
-  $avahi_disabled = true,
-  $cups_disabled = true,
-  $dhcp_disabled = true,
-  $ldap_disabled = true,
-  $nfs_disabled = true,
-  $rpc_disabled = true,
-  $dns_disabled = true,
-  $ftp_disabled = true,
-  $http_disabled = true,
-  $mail_disabled = true,
-  $samba_disabled = true,
-  $proxy_disabled = true,
-  $snmp_disabled = true,
-  $mta_local = true,
-  $rsync_disabled = true,
+  $x_enabled = false,
+  $avahi_enabled = false,
+  $cups_enabled = false,
+  $dhcp_enabled = false,
+  $ldap_enabled = false,
+  $nfs_enabled = false,
+  $rpc_enabled = false,
+  $dns_enabled = false,
+  $ftp_enabled = false,
+  $http_enabled = false,
+  $mail_enabled = false,
+  $samba_enabled = false,
+  $proxy_enabled = false,
+  $snmp_enabled = false,
+  $mta_local = false,
+  $rsync_enabled = false,
 ){
 
   case $::osfamily {
     'redhat': {
-      if $x_disabled {
+      unless $x_enabled {
         package { 'xorg-x11*':
           ensure => 'absent',
         }
       }
 
-      if $avahi_disabled {
+      unless $avahi_enabled {
         service { 'avahi-daemon':
           ensure => 'stopped',
           enable => false,
         }
       }
 
-      if $cups_disabled {
+      unless $cups_enabled {
         service { 'cups':
           ensure => 'stopped',
           enable => false,
         }
       }
 
-      if $dhcp_disabled {
+      unless $dhcp_enabled {
         service { 'dhcpd':
           ensure => 'stopped',
           enable => false,
@@ -52,7 +52,7 @@ class toughen::services (
         }
       }
 
-      if $ldap_disabled {
+      unless $ldap_enabled {
         service { 'slapd':
           ensure => 'stopped',
           enable => false,
@@ -63,7 +63,7 @@ class toughen::services (
         }
       }
 
-      if $nfs_disabled {
+      unless $nfs_enabled {
         service { 'nfs':
           ensure => 'stopped',
           enable => false,
@@ -73,7 +73,7 @@ class toughen::services (
         }
       }
 
-      if $rpc_disabled {
+      unless $rpc_enabled {
         # Note there's a bug that means puppet doesn't understand 'indirect' services:
         # https://tickets.puppetlabs.com/browse/PUP-6759
         ## From fact defined by module
@@ -92,7 +92,7 @@ class toughen::services (
         }
       }
 
-      if $dns_disabled {
+      unless $dns_enabled {
         package { [
           'bind',
           'dnsjava',
@@ -114,7 +114,7 @@ class toughen::services (
         }
       }
 
-      if $ftp_disabled {
+      unless $ftp_enabled {
         package { [
           'globus-gridftp-server',
           'jglobus-gridftp',
@@ -129,7 +129,7 @@ class toughen::services (
         }
       }
 
-      if $http_disabled {
+      unless $http_enabled {
         package { [
           'darkhttpd',
           'erlang-inets',
@@ -167,7 +167,7 @@ class toughen::services (
         }
       }
 
-      if $mail_disabled {
+      unless $mail_enabled {
         package { [
           'cyrus-imapd',
           'dovecot',
@@ -178,7 +178,7 @@ class toughen::services (
         }
       }
 
-      if $samba_disabled {
+      unless $samba_enabled {
         package { [
           'cifs-utils',
           'kdenetwork-fileshare-samba',
@@ -190,7 +190,7 @@ class toughen::services (
         }
       }
 
-      if $proxy_disabled {
+      unless $proxy_enabled {
         package { [
           '3proxy',
           'connect-proxy',
@@ -224,7 +224,7 @@ class toughen::services (
         }
       }
 
-      if $snmp_disabled {
+      unless $snmp_enabled {
         package { [
           'net-snmp',
         ]:
@@ -232,7 +232,7 @@ class toughen::services (
         }
       }
 
-      if $mta_local {
+      unless $mta_local {
         # Fact defined by this module
         if str2bool($::postfix_installed) {
           file_line { 'postfix_local_only':
@@ -267,7 +267,7 @@ class toughen::services (
         }
       }
 
-      if $rsync_disabled {
+      unless $rsync_enabled {
         service { 'rsyncd':
           ensure => 'stopped',
           enable => false,
