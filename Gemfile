@@ -1,16 +1,16 @@
 source 'https://rubygems.org'
 
+ruby '2.1.10'
+
 group :test do
     gem 'puppetlabs_spec_helper', :require => false
     gem 'simplecov', :require => false
+    gem 'metadata-json-lint'
+    gem 'rubocop'
 end
 
-puppetversion = ENV.key?('PUPPET_VERSION') ? "= #{ENV['PUPPET_VERSION']}" : ['>= 2.7']
-gem 'puppet', puppetversion
-
+gem 'puppet', '~>4'
 gem 'facter'
-gem 'metadata-json-lint'
-gem 'rubocop'
 gem 'json'
 gem 'semantic_puppet'
-gem 'rake', '12.0.0'
+gem 'rake'
