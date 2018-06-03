@@ -95,8 +95,5 @@ DEPENDENCIES
   semantic_puppet
   simplecov
 
-RUBY VERSION
-   ruby 2.1.10p492
-
 BUNDLED WITH
-   1.16.1
+   1.16.2
