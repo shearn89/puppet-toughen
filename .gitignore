@@ -3,3 +3,4 @@ coverage/
 vendor/
 pkg/
 log/
+Gemfile.lock
