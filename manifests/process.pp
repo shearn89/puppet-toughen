@@ -4,7 +4,7 @@ class toughen::process {
 
   limits::fragment {
     '*/hard/core':
-      value => 0;
+      value => '0';
   }
 
   if $::osfamily == 'redhat' {
