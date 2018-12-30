@@ -248,8 +248,8 @@ class toughen::services (
             notify =>  Service['postfix'],
           }
           service { 'postfix':
-            ensure    => 'running',
-            enable    => true,
+            ensure => 'running',
+            enable => true,
           }
         }
 
