@@ -1,7 +1,7 @@
 language: ruby
 rvm:
+- 2.5
 - 2.4
-- 2.1
 script: bundle exec rake test
 branches:
   only:
@@ -9,8 +9,8 @@ branches:
   - staging
   - develop
 env:
-- PUPPET_VERSION=5.5.1
-- PUPPET_VERSION=4.10.11
+- PUPPET_VERSION=5.5.8
+- PUPPET_VERSION=4.10.12
 notifications:
   email: false
   pushover:
