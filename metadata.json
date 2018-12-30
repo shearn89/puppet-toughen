@@ -1,6 +1,6 @@
 {
   "name": "shearn89-toughen",
-  "version": "0.7.0",
+  "version": "1.0.0",
   "author": "shearn89",
   "summary": "CIS System hardening for RedHat, Debian, and more.",
   "license": "MIT",
