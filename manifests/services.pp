@@ -236,14 +236,20 @@ class toughen::services (
         # Fact defined by this module
         if str2bool($::postfix_installed) {
           file_line { 'postfix_local_only':
-            path  => '/etc/postfix/main.cf',
-            line  => 'inet_interfaces = localhost',
-            match => '^inet_interface',
+            path   => '/etc/postfix/main.cf',
+            line   => 'inet_interfaces = localhost',
+            match  => '^inet_interface',
+            notify =>  Service['postfix'],
+          }
+          file_line { 'postfix_ipv4_only':
+            path   => '/etc/postfix/main.cf',
+            line   => 'inet_protocols = ipv4',
+            match  => '^inet_protocols',
+            notify =>  Service['postfix'],
           }
           service { 'postfix':
             ensure    => 'running',
             enable    => true,
-            subscribe => File_line['postfix_local_only'],
           }
         }
 
