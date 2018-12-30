@@ -2,6 +2,14 @@
 All notable changes to the project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.0] - 2018-12-31
+- Dropping support for Ruby 2.1
+- Dropping support for Puppet 3
+- Reversed `toughen::services` parameters - they're no longer double negatives. You'll need to flip your booleans!
+- Adding `inet_protocols = ipv4` to postfix so it starts when ipv6 is disabled.
+- Made warning banner smaller
+- Beaker tests not working yet
+
 ## [0.7.0] - 2017-07-04
 - Adding securetty settings
 - Fixing some CI stuff

@@ -15,7 +15,6 @@ describe 'toughen::services' do
         it { expect { should raise_error(Puppet::Error) } }
     end
 
-  
     context 'with x_disabled false' do
 	let (:params) do { :x_disabled => false } end
 	it { should_not { contain_package('xorg-x11*') } }

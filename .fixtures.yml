@@ -1,19 +1,15 @@
 fixtures:
-    repositories:
-        stdlib: "git://github.com/puppetlabs/puppetlabs-stdlib.git"
-        firewall: "git://github.com/puppetlabs/puppetlabs-firewall.git"
-        limits: "git://github.com/puppetlabs/puppetlabs-limits.git"
-        sysctl: "git://github.com/thias/puppet-sysctl.git"
-        ntp: "git://github.com/puppetlabs/puppetlabs-ntp.git"
-        augeasproviders_core: "git://github.com/hercules-team/augeasproviders_core.git"
-        augeasproviders_grub: "git://github.com/hercules-team/augeasproviders_grub.git"
-        auditd: "git://github.com/kemra102/puppet-auditd.git"
-        concat: 
-            repo: "git://github.com/puppetlabs/puppetlabs-concat.git"
-            ref: "2.2.1"
-        selinux:
-            repo: "git://github.com/voxpupuli/puppet-selinux.git"
-            ref: "v0.7.1"
+    forge_modules:
+        stdlib: "puppetlabs/stdlib"
+        firewall: "puppetlabs/firewall"
+        limits: "puppetlabs/limits"
+        concat: "puppetlabs/concat"
+        ntp: "puppetlabs/ntp"
+        selinux: "puppet/selinux"
+        augeasproviders_core: "herculesteam/augeasproviders_core"
+        augeasproviders_grub: "herculesteam/augeasproviders_grub"
+        sysctl: "thias/sysctl"
+        auditd: "kemra102/auditd"
     symlinks:
         toughen: "#{source_dir}"
 
